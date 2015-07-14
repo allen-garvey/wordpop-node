@@ -1,0 +1,29 @@
+{
+  "name": "wordpop",
+  "version": "1.0.0",
+  "description": "Display word popularity from Craigslist Searches",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/allen-garvey/wordpop.git"
+  },
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Allen Garvey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/allen-garvey/wordpop/issues"
+  },
+  "homepage": "https://github.com/allen-garvey/wordpop",
+  "dependencies": {
+    "express": "^4.13.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0"
+  }
+}

@@ -1,0 +1,21 @@
+/**
+* Layout
+*/
+.container{
+	max-width: $container_width;
+	margin: 0 auto;
+}
+
+#main_list{
+	list-style-position: inside;
+	padding: 0;
+}
+
+#main_list li{
+	@include font_size(1);
+	padding: 0.5em 0;
+}
+
+#main_list li:nth-child(even){
+	background-color: lighten($color_secondary, 30%);
+}
