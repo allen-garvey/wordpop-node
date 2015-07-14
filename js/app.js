@@ -1,12 +1,13 @@
 $.ajax({
-	url: WDP.baseUrl + 'ajax_responder.php',
+	url: WDP.baseUrl + 'search/cl/web',
 	type: 'GET',
 	dataType: 'html'
 })
 
 .done(function(searchResults) {
+	console.log(searchResults);
 	var set = new WDP.countedSet();
-	$(searchResults).find('.hdrlnk').each(function(index) {
+	$(searchResults).find('a.hdrlnk').each(function(index) {
 		var resultsLink = $(this);
 		var title = resultsLink.text();
 		title.split(" ").map(function(word, index) {
@@ -22,5 +23,5 @@ $.ajax({
 	WDP.displayViz(sortedCollection);
 })
 .fail(function() {
-	console.log("error");
+	console.log("Could not retrieve search results from Craigslist");
 });
