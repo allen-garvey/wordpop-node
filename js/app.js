@@ -16,7 +16,6 @@ $.ajax({
 	});
 	var main_list = $('#main_list');
 	var sortedCollection = set.getSortedCollection();
-	// console.log(sortedCollection);
 	sortedCollection.map(function(elem) {
 		main_list.append("<li>" + elem.name + ' ('+ elem.amount + ")</li>");
 	});
