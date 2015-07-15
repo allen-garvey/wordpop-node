@@ -1,0 +1,13 @@
+g.dots text{
+	opacity: 0;
+	fill: $color_secondary;
+}
+g.dots:hover text{
+	opacity: 1;
+}
+//acts as background color for text
+//i cannot get this to show up
+g.dots .word_label_background{
+	fill: red;
+	stroke: red;
+}
