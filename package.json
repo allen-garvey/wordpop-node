@@ -4,7 +4,7 @@
   "description": "Display word popularity from Craigslist Searches",
   "repository": {
     "type": "git",
-    "url": "https://github.com/allen-garvey/wordpop.git"
+    "url": "https://github.com/allen-garvey/wordpop-node.git"
   },
   "main": "app.js",
   "scripts": {
@@ -13,9 +13,9 @@
   "author": "Allen Garvey",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/allen-garvey/wordpop/issues"
+    "url": "https://github.com/allen-garvey/wordpop-node/issues"
   },
-  "homepage": "https://github.com/allen-garvey/wordpop",
+  "homepage": "https://github.com/allen-garvey/wordpop-node",
   "dependencies": {
     "express": "^4.13.1"
   },
