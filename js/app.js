@@ -1,7 +1,11 @@
 $.ajax({
-	url: WDP.baseUrl + 'search/cl/web',
-	type: 'GET',
-	dataType: 'html'
+	url: WDP.baseUrl + 'data',
+	type: 'POST',
+	dataType: 'html',
+	data: {domain : 'craigslist',
+			city : 'new_york',
+			category : 'jobs',
+			subcategory : 'web'}
 })
 
 .done(function(searchResults) {
