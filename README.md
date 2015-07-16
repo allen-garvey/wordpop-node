@@ -1,10 +1,10 @@
 #Wordpop
 
-Search Craigslist and display the popularity of words in your search results.
+Node webapp to display word popularity in a Craigslist search.
 
 ##Dependencies
 
-* PHP 5.4.* or later
+* node 0.12.7 or later
 * npm to install dependencies
 * sass to compile Sass files
 
@@ -12,7 +12,7 @@ Search Craigslist and display the popularity of words in your search results.
 
 * `cd` into downloaded project directory
 * Type `npm install` to install dependencies
-* Type `gulp build` compile raw js files
+* Type `gulp build` to compile raw js files
 
 ##License
 
