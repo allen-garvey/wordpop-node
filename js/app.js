@@ -5,6 +5,11 @@ $.ajax({
 })
 
 .done(function(searchResults) {
+	if(searchResults.match(/^This IP has been automatically blocked./i)){
+		WDP.displayError("Sorry, but it appears that Craigslist has blocked this site from collecting data.");
+		console.error(searchResults);
+		return;
+	}
 	console.log(searchResults);
 	var set = new WDP.countedSet();
 	$(searchResults).find('a.hdrlnk').each(function(index) {
@@ -22,5 +27,5 @@ $.ajax({
 	WDP.displayViz(sortedCollection);
 })
 .fail(function() {
-	console.log("Could not retrieve search results from Craigslist");
+	WDP.displayError("Sorry, could not connect to Craigslist.");
 });

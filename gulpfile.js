@@ -6,21 +6,21 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var maps = require('gulp-sourcemaps');
 
-var scriptsDir = 'public_html/scripts';
+var scriptsOutputDir = 'public_html/scripts';
 
 gulp.task('concatScripts', function(){
-	return gulp.src(['js/counted_set.js', 'js/data_viz.js', 'js/app.js'])
+	return gulp.src(['js/wordpop_util.js', 'js/counted_set.js', 'js/data_viz.js', 'js/app.js'])
 		.pipe(maps.init())
 		.pipe(concat('app.js'))
 		.pipe(maps.write('./'))
-		.pipe(gulp.dest(scriptsDir));
+		.pipe(gulp.dest(scriptsOutputDir));
 });
 
 gulp.task('minifyScripts', ['concatScripts'], function(){
-	return gulp.src(scriptsDir + '/app.js')
+	return gulp.src(scriptsOutputDir + '/app.js')
 		.pipe(uglify())
 		.pipe(rename('app.min.js'))
-		.pipe(gulp.dest(scriptsDir));
+		.pipe(gulp.dest(scriptsOutputDir));
 });
 gulp.task('watchScripts', function(){
 	gulp.watch('js/**/*.js', ['minifyScripts']);
