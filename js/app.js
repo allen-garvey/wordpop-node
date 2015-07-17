@@ -1,35 +1,39 @@
-$.ajax({
-	url: WDP.baseUrl + 'data',
-	type: 'POST',
-	dataType: 'html',
-	data: {domain : 'craigslist',
-			city : 'new_york',
-			category : 'jobs',
-			subcategory : 'web'}
-})
+WDP.initSearchForm = function(){
+	var searchForm = $("#search_form");
+	searchForm.submit(function(e){
+    	return false;
+	});
 
-.done(function(searchResults) {
-	if(searchResults.match(/^This IP has been automatically blocked./i)){
-		WDP.displayError("Sorry, but it appears that Craigslist has blocked this site from collecting data.");
-		console.error(searchResults);
-		return;
+	searchForm.find("input[type='submit']").on('click', function(event) {
+		var requestData = {
+							domain : 'craigslist',
+							city : $("#search_city option:selected").val(),
+							category : $("#search_category option:selected").val(),
+							subcategory : $("#search_subcategory option:selected").val()
+						};
+
+		WDP.displaySearchViz(requestData);
+	});
+
+	WDP.populateSearchFields();
+
+}
+
+WDP.populateSearchFields = function(){
+	$.getJSON(WDP.baseUrl + 'data/cl.json', function(searchModel) {
+		var model = searchModel.craigslist;
+		WDP.populateSelect($('#search_city'), model.cities);
+		WDP.populateSelect($('#search_category'), model.categories);
+		WDP.populateSelect($('#search_subcategory'), model.categories.jobs.subcategories);
+
+	});	
+}
+
+WDP.populateSelect = function(parentSelect, model){
+	for(var item in model){
+		parentSelect.append("<option value='"+ item +"'>" + model[item].display + "</option>")
 	}
-	console.log(searchResults);
-	var set = new WDP.countedSet();
-	$(searchResults).find('a.hdrlnk').each(function(index) {
-		var resultsLink = $(this);
-		var title = resultsLink.text();
-		title.split(" ").map(function(word, index) {
-			set.add(word);
-		});
-	});
-	var main_list = $('#main_list');
-	var sortedCollection = set.getSortedCollection();
-	sortedCollection.map(function(elem) {
-		main_list.append("<li>" + elem.name + ' ('+ elem.amount + ")</li>");
-	});
-	WDP.displayViz(sortedCollection);
-})
-.fail(function() {
-	WDP.displayError("Sorry, could not connect to Craigslist.");
-});
+}
+
+WDP.initSearchForm();
+
