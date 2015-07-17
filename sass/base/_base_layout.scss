@@ -19,3 +19,20 @@
 #main_list li:nth-child(even){
 	background-color: lighten($color_secondary, 30%);
 }
+
+@include media_q(lg){
+	#main_list, #viz-wrapper{
+		width: 49%;
+		float: left;
+	}
+	#viz-wrapper{
+		float: left;
+	}
+	#main_list{
+		float: right;
+	}
+	#main_list li{
+		@include font_size(-1);
+		padding: 0.5em 0;
+	}
+}
