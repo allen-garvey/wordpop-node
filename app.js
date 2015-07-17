@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http');
 var bodyParser = require('body-parser');
-var ajaxSearchHandler = require('./models/request_to_url');
+var CLModel = require('./models/cl_model');
 
 app.use(express.static('public_html'));
 app.use(bodyParser.json()); // for parsing application/json
@@ -23,7 +23,7 @@ app.get('/', function (req, res) {
 
 app.post('/data', function (req, res) {
     console.log(req.body);
-    var reqUrl = ajaxSearchHandler.urlFromRequest(req.body);
+    var reqUrl = CLModel.urlFromRequest(req.body);
     if(reqUrl.match(/^http:/)){
         http.get(reqUrl, function(searchResponse) {
             searchResponse.pipe(res);
@@ -32,6 +32,10 @@ app.post('/data', function (req, res) {
     else{
         res.status(400).send('400 Bad request');
     }
+});
+
+app.get('/data/cl.json', function (req, res) {
+    res.send(CLModel.model);
 });
 
 //The 404 Route (ALWAYS Keep this as the last route)
