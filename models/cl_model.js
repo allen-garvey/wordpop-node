@@ -3,14 +3,17 @@ var searchModel = {
 	craigslist : {
 		domain : 'craigslist.org',
 		cities : {
-			new_york : 'newyork',
-			seattle : 'seattle',
-			san_francisco : 'sfbay'
+			new_york : {display : 'New York', url : 'newyork'},
+			seattle : {display: 'Seattle', url : 'seattle'},
+			san_francisco : {display: 'San Francisco', url : 'sfbay'}
 		},
 		categories : {
-			jobs : {
-				web : 'web',
-				software : 'sof'
+			jobs : { 
+					display : 'Jobs', 
+					subcategories :{
+									web : {display : 'Web', url : 'web'},
+									software : {display: 'Software', url : 'sof'}
+									}
 			}
 		}	
 	}
@@ -33,13 +36,18 @@ var urlFromRequest = function(requestData){
 		return 'not valid city or category';
 		return false;
 	}
-	var subcategory = category[requestData.subcategory];
+	var subcategory = category.subcategories[requestData.subcategory];
 	if(!subcategory){
 		return 'not valid subcategory';
 		return false;
 	}
-	return 'http://' + city + '.' + model.domain + '/search/' + subcategory;
+	return 'http://' + city.url + '.' + model.domain + '/search/' + subcategory.url;
 }
 
 
-module.exports = {'urlFromRequest' : urlFromRequest};
+module.exports = {
+					'urlFromRequest' : urlFromRequest,
+					'model' : searchModel
+				};
+
+
