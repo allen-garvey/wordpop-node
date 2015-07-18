@@ -71,12 +71,16 @@ WDP.displaySearchViz = function(requestData){
 		var sortedCollection = set.getSortedCollection();
 		//remove previous viz
 		WDP.resetViz();
+		if(sortedCollection.length === 0){
+			WDP.displayError("Sorry, no results found.");
+			return;
+		}
 		sortedCollection.map(function(elem) {
 			main_list.append("<li>" + elem.name + ' ('+ elem.amount + ")</li>");
 		});
 		WDP.displayViz(sortedCollection);
 	})
-	.fail(function() {
+	.fail(function(jqXHR, textStatus, error) {
 		WDP.displayError("Sorry, could not connect to Craigslist.");
 	});
 }
