@@ -12,8 +12,17 @@ var searchModel = {
 					display : 'Jobs', 
 					subcategories :{
 									web : {display : 'Web', url : 'web'},
-									software : {display: 'Software', url : 'sof'}
-									}
+									software : {display: 'Software', url : 'sof'},
+									internet_engineering : {display : 'Internet Engineering', url : 'eng'},
+									systems_networking : {display : 'Systems/Networking', url : 'sad'}
+					}
+			},
+			gigs : {
+					display : 'Gigs',
+					subcategories: {
+									computer : {display : 'Computer', url : 'cpg'},
+									creative : {display : 'Creative', url : 'crg'}
+					}
 			}
 		}	
 	}
@@ -41,7 +50,8 @@ var urlFromRequest = function(requestData){
 		return 'not valid subcategory';
 		return false;
 	}
-	return 'http://' + city.url + '.' + model.domain + '/search/' + subcategory.url;
+	var queryString = requestData.query ? '?query=' + encodeURIComponent(requestData.query) : '';
+	return 'http://' + city.url + '.' + model.domain + '/search/' + subcategory.url + queryString;
 }
 
 
