@@ -1,4 +1,7 @@
-WDP.initSearchForm = function(){
+WDP.models = {};
+WDP.init = {};
+
+WDP.init.searchForm = function(){
 	var searchForm = $("#search_form");
 	searchForm.submit(function(e){
     	return false;
@@ -9,31 +12,41 @@ WDP.initSearchForm = function(){
 							domain : 'craigslist',
 							city : $("#search_city option:selected").val(),
 							category : $("#search_category option:selected").val(),
-							subcategory : $("#search_subcategory option:selected").val()
+							subcategory : $("#search_subcategory option:selected").val(),
+							query : $("#search_query").val()
 						};
 
 		WDP.displaySearchViz(requestData);
 	});
 
-	WDP.populateSearchFields();
+	WDP.init.populateSearchFields();
+	$('#search_category').on('change', function(event) {
+		WDP.init.subcategoriesForCategory();
+	});
 
 }
 
-WDP.populateSearchFields = function(){
+WDP.init.populateSearchFields = function(){
 	$.getJSON(WDP.baseUrl + 'data/cl.json', function(searchModel) {
 		var model = searchModel.craigslist;
-		WDP.populateSelect($('#search_city'), model.cities);
-		WDP.populateSelect($('#search_category'), model.categories);
-		WDP.populateSelect($('#search_subcategory'), model.categories.jobs.subcategories);
+		WDP.models.cl = model;
+		WDP.init.select($('#search_city'), model.cities);
+		WDP.init.select($('#search_category'), model.categories);
+		WDP.init.subcategoriesForCategory();
 
 	});	
 }
 
-WDP.populateSelect = function(parentSelect, model){
+WDP.init.select = function(parentSelect, model){
 	for(var item in model){
 		parentSelect.append("<option value='"+ item +"'>" + model[item].display + "</option>")
 	}
 }
 
-WDP.initSearchForm();
+WDP.init.subcategoriesForCategory = function(){
+	document.getElementById('search_subcategory').innerHTML = '';
+	WDP.init.select($('#search_subcategory'), WDP.models.cl.categories[$("#search_category option:selected").val()].subcategories);	
+}
+
+WDP.init.searchForm();
 
