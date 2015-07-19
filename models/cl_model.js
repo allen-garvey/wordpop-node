@@ -5,7 +5,14 @@ var searchModel = {
 		cities : {
 			new_york : {display : 'New York', url : 'newyork'},
 			seattle : {display: 'Seattle', url : 'seattle'},
-			san_francisco : {display: 'San Francisco', url : 'sfbay'}
+			san_francisco : {display: 'San Francisco', url : 'sfbay'},
+			denver : {display: 'Denver', url : 'denver'},
+			san_diego : {display: 'San Diego', url : 'sandiego'},
+			los_angeles : {display: 'Los Angeles', url : 'losangeles'},
+			buffalo : {display: 'Buffalo', url : 'buffalo'},
+			austin : {display: 'Austin', url : 'austin'},
+			anchorage : {display: 'Anchorage', url : 'anchorage'},
+			portland : {display: 'Portland, OR', url : 'portland'}
 		},
 		categories : {
 			jobs : { 
