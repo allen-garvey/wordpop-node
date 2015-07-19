@@ -1,13 +1,18 @@
 g.dots text{
-	opacity: 0;
-	fill: $color_secondary;
+	display: none;
 }
-g.dots:hover text{
-	opacity: 1;
+g.dots:hover{
+	text{
+		display: block;	
+	}
+	circle{
+		fill: $color_secondary;
+	}
+	
 }
 //acts as background color for text
 //i cannot get this to show up
-g.dots .word_label_background{
-	fill: red;
-	stroke: red;
-}
+// g.dots .word_label_background{
+// 	fill: red;
+// 	stroke: red;
+// }
