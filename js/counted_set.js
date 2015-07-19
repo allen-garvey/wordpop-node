@@ -21,7 +21,8 @@ WDP.countedSet.prototype.add = function(item) {
 * Function returning true or false whether item should be added to the set
 */
 WDP.countedSet.prototype.shouldExcludeItem = function(item){
-	return !item.match(/[a-zA-z0-9]/);
+	//exclude non letters or numbers and certain words
+	return !item.match(/[a-zA-z0-9]/) || item.match(/^(and|to|a|the|of|for|in|with|is|be|our|as|an|or|on|are)$/);
 }
 
 WDP.countedSet.prototype.countForObject = function(itemName) {
