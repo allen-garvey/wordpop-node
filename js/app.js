@@ -8,14 +8,15 @@ WDP.init.searchForm = function(){
 	});
 
 	searchForm.find("input[type='submit']").on('click', function(event) {
+		var currentCity = $("#search_city option:selected").val();
 		var requestData = {
 							domain : 'craigslist',
-							city : $("#search_city option:selected").val(),
+							city : currentCity,
 							category : $("#search_category option:selected").val(),
 							subcategory : $("#search_subcategory option:selected").val(),
 							query : $("#search_query").val()
 						};
-
+		WDP.models.currentCity = currentCity;
 		WDP.displaySearchViz(requestData);
 	});
 
