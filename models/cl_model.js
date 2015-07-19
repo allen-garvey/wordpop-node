@@ -46,9 +46,9 @@ var urlFromRequest = function(requestData){
 		return 'not valid model';
 		return false;
 	}
-	var city = model.cities[requestData.city];
+	var cityUrl =  cityUrlFromCity(requestData.city, model);
 	var category = model.categories[requestData.category];
-	if(!city || !category){
+	if(!cityUrl || !category){
 		return 'not valid city or category';
 		return false;
 	}
@@ -58,13 +58,23 @@ var urlFromRequest = function(requestData){
 		return false;
 	}
 	var queryString = requestData.query ? '?query=' + encodeURIComponent(requestData.query) : '';
-	return 'http://' + city.url + '.' + model.domain + '/search/' + subcategory.url + queryString;
+	return cityUrl + '/search/' + subcategory.url + queryString;
+}
+
+var cityUrlFromCity = function(city, sModel){
+	var model = sModel ? sModel : searchModel['craigslist'];
+	var validatedCity = model.cities[city];
+	if(validatedCity){
+		return 'http://' + validatedCity.url + '.' + model.domain;
+	}
+	return false;
 }
 
 
 module.exports = {
 					'urlFromRequest' : urlFromRequest,
-					'model' : searchModel
+					'model' : searchModel,
+					'cityUrlFromCity' : cityUrlFromCity
 				};
 
 
