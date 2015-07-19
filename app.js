@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
 });
 
 app.post('/data', function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     var reqUrl = CLModel.urlFromRequest(req.body);
     if(reqUrl.match(/^http:/)){
         http.get(reqUrl, function(searchResponse) {
@@ -36,6 +36,21 @@ app.post('/data', function (req, res) {
 
 app.get('/data/cl.json', function (req, res) {
     res.send(CLModel.model);
+});
+
+app.get('/data/cl-postbody', function(req, res){
+    // console.log("City requested: " + req.query.city);
+    var reqUrlBase = CLModel.cityUrlFromCity(req.query.city);
+    if(!reqUrlBase){
+        res.status(400).send('400 Bad request');
+    }
+    //test required because if few results craigslist will give links to nearby cities
+    var reqUrl = req.query.link.match(/^http:/) ? req.query.link : reqUrlBase + req.query.link;
+    // console.log("Url requested: " + reqUrl);
+    http.get(reqUrl, function(searchResponse) {
+        searchResponse.pipe(res);
+    }); 
+
 });
 
 //The 404 Route (ALWAYS Keep this as the last route)
