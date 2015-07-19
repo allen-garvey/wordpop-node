@@ -60,35 +60,73 @@ WDP.displaySearchViz = function(requestData){
 			return;
 		}
 		var set = new WDP.countedSet();
+		var postLinks = [];
 		$(searchResults).find('a.hdrlnk').each(function(index) {
 			var resultsLink = $(this);
 			var title = resultsLink.text();
-			title.split(" ").map(function(word, index) {
+			var link = resultsLink.attr("href");
+			//don't add links to nearby cities
+			if(!link.match(/^http:/)){
+				postLinks.push(link);
+			}
+			title.split(" ").map(function(word) {
 				set.add(word);
 			});
 		});
-		var main_list = $('#main_list');
-		var sortedCollection = set.getSortedCollection();
-		//remove previous viz
-		WDP.resetViz();
-		if(sortedCollection.length === 0){
-			WDP.displayError("Sorry, no results found.");
-			return;
-		}
-		sortedCollection.map(function(elem) {
-			main_list.append("<li>" + elem.name + ' ('+ elem.amount + ")</li>");
-		});
-		WDP.displayViz(sortedCollection);
+		WDP.displayDataForSet(set);
+		WDP.displayPostBodies(postLinks, set);
 	})
 	.fail(function(jqXHR, textStatus, error) {
 		WDP.displayError("Sorry, could not connect to Craigslist.");
 	});
 }
 
+WDP.displayPostBodies = function(postLinks, countedSet){
+	postLinks.map(function(postLink) {
+		$.ajax({
+			url: WDP.baseUrl + 'data/cl-postbody',
+			type: 'GET',
+			dataType: 'html',
+			data: {link : postLink, city : WDP.models.currentCity}
+		})
+		.done(function(post) {
+			var postBody = $(post).find('#postingbody').text();
+			postBody.split(" ").map(function(word) {
+				countedSet.add(word);
+			});
+			WDP.displayDataForSet(countedSet);
+		})
+		.fail(function() {
+			console.log("Could not retrieve post body");
+		});	
+	});
+	
+	
+}
+
+WDP.displayWordList = function(sortedCollection){
+	var main_list = $('#main_list');
+	sortedCollection.map(function(elem) {
+		main_list.append("<li>" + elem.name + ' ('+ elem.amount + ")</li>");
+	});
+}
+
 
 WDP.resetViz = function(){
-    $('#viz-wrapper').html('');
-    $('#main_list').html('');
+    document.getElementById('viz-wrapper').innerHTML = '';
+    document.getElementById('main_list').innerHTML = '';
+}
+
+
+WDP.displayDataForSet = function(countedSet){
+	var sortedCollection = countedSet.getSortedCollection();
+	WDP.resetViz();
+	if(sortedCollection.length === 0){
+		WDP.displayError("Sorry, no results found.");
+		return;
+	}
+	WDP.displayWordList(sortedCollection);
+	WDP.displayViz(sortedCollection);
 }
 
 
