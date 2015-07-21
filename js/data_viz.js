@@ -62,6 +62,8 @@ WDP.displaySearchViz = function(requestData){
 			console.error(searchResults);
 			return;
 		}
+		var categorySetFactory = new WDP.set.countedCategorySetFactory();
+		var categorySet = categorySetFactory.makeCountedCategorySet('programmingLanguages');
 		var set = new WDP.set.countedSet();
 		var postLinks = [];
 		$(searchResults).find('a.hdrlnk').each(function(index) {
@@ -74,17 +76,18 @@ WDP.displaySearchViz = function(requestData){
 			}
 			title.split(" ").map(function(word) {
 				set.add(word);
+				categorySet.add(word);
 			});
 		});
-		WDP.displayDataForSet(set);
-		WDP.displayPostBodies(postLinks, set);
+		WDP.displayDataForSet(set, categorySet);
+		WDP.displayPostBodies(postLinks, set, categorySet);
 	})
 	.fail(function(jqXHR, textStatus, error) {
 		WDP.displayError("Sorry, could not connect to Craigslist.");
 	});
 }
 
-WDP.displayPostBodies = function(postLinks, countedSet){
+WDP.displayPostBodies = function(postLinks, countedSet, categorySet){
 	WDP.posts.total = postLinks.length;
 	WDP.posts.done = 0;
 
@@ -99,6 +102,7 @@ WDP.displayPostBodies = function(postLinks, countedSet){
 			var postBody = $(post).find('#postingbody').text();
 			postBody.split(" ").map(function(word) {
 				countedSet.add(word);
+				categorySet.add(word);
 			});
 		})
 		.fail(function() {
@@ -107,7 +111,8 @@ WDP.displayPostBodies = function(postLinks, countedSet){
 			WDP.posts.done++;
 			WDP.display.counter();
 			if(WDP.posts.done >= WDP.posts.total){
-				WDP.displayDataForSet(countedSet);	
+				WDP.displayDataForSet(countedSet, categorySet);
+				console.log(categorySet.getSortedCollection());
 			}
 		});
 	});
@@ -126,10 +131,11 @@ WDP.displayWordList = function(sortedCollection){
 WDP.resetViz = function(){
     document.getElementById('viz-wrapper').innerHTML = '';
     document.getElementById('main_list').innerHTML = '';
+    document.getElementById('category-bar-graph-wrapper').innerHTML = '';
 }
 
 
-WDP.displayDataForSet = function(countedSet){
+WDP.displayDataForSet = function(countedSet, categorySet){
 	var sortedCollection = countedSet.getSortedCollection();
 	WDP.resetViz();
 	if(sortedCollection.length === 0){
@@ -138,6 +144,7 @@ WDP.displayDataForSet = function(countedSet){
 	}
 	WDP.displayWordList(sortedCollection);
 	WDP.displayViz(sortedCollection);
+	WDP.display.categoryBarChart(categorySet);
 }
 
 WDP.display.counter = function(){
@@ -145,7 +152,23 @@ WDP.display.counter = function(){
 }
 
 
+WDP.display.categoryBarChart = function(categorySet){
+	var sortedCollection = categorySet.getSortedCollection();
 
+
+	var xDomain = d3.extent(sortedCollection, function(d){
+        return d.amount;
+    });
+	var xScale = d3.scale.linear().domain(xDomain).range([0, 1]);
+	
+	d3.select("#category-bar-graph-wrapper")
+  		.selectAll("div")
+    	.data(sortedCollection)
+  		.enter().append("div")
+  		.attr('class', 'bar_chart_bar')
+    	.style("width", function(d) { return xScale(d.amount) * 100 + "%"; })
+    	.text(function(d) { return d.name + ' (' + d.amount + ')'; });
+}
 
 
 
