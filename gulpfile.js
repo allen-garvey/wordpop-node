@@ -9,7 +9,7 @@ var maps = require('gulp-sourcemaps');
 var scriptsOutputDir = 'public_html/scripts';
 
 gulp.task('concatScripts', function(){
-	return gulp.src(['js/wordpop_util.js', 'js/counted_set.js', 'js/data_viz.js', 'js/app.js'])
+	return gulp.src(['js/wordpop_util.js', 'js/counted_set.js', 'js/counted_category_set.js', 'js/data_viz.js', 'js/app.js'])
 		.pipe(maps.init())
 		.pipe(concat('app.js'))
 		.pipe(maps.write('./'))
