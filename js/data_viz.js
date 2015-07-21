@@ -112,7 +112,6 @@ WDP.displayPostBodies = function(postLinks, countedSet, categorySet){
 			WDP.display.counter();
 			if(WDP.posts.done >= WDP.posts.total){
 				WDP.displayDataForSet(countedSet, categorySet);
-				console.log(categorySet.getSortedCollection());
 			}
 		});
 	});
@@ -149,6 +148,15 @@ WDP.displayDataForSet = function(countedSet, categorySet){
 
 WDP.display.counter = function(){
 	document.getElementById('progress-counter').innerHTML = 'Results scanned: ' + WDP.posts.done + '/' + WDP.posts.total;
+	if(WDP.posts.done === WDP.posts.total){
+		document.getElementById('progress_bar').style.width = '0%';
+	}
+	//don't continually update for performance reasons
+	else if(WDP.posts.done % 20 === 0){
+		var done = WDP.posts.done;
+		var total = WDP.posts.total;
+		document.getElementById('progress_bar').style.width = done / total * 100 + '%';
+	}
 }
 
 
