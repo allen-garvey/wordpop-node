@@ -5,7 +5,7 @@ WDP.set.countedSet = function(){
 };
 
 WDP.set.countedSet.prototype.add = function(item) {
-	item = item.toLowerCase();
+	item = this.normalizeItemName(item);
 	if(this.shouldExcludeItem(item)){
 		return;
 	}
@@ -16,6 +16,10 @@ WDP.set.countedSet.prototype.add = function(item) {
 		this.collection[item] = 1;
 	}
 };
+
+WDP.set.countedSet.prototype.normalizeItemName = function(item){
+	return item.toLowerCase();
+}
 
 /*
 * Function returning true or false whether item should be added to the set
