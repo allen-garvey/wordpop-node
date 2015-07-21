@@ -21,11 +21,11 @@
 }
 
 @include media_q(lg){
-	#main_list, #viz-wrapper{
+	#main_list, .viz_container{
 		width: 49%;
 		float: left;
 	}
-	#viz-wrapper{
+	.viz_container{
 		float: left;
 	}
 	#main_list{
