@@ -1,3 +1,6 @@
+WDP.display = {};
+WDP.posts = {};
+
 WDP.displayViz = function(data){
 	//height and width of svg
 	var height = window.innerHeight;
@@ -82,6 +85,9 @@ WDP.displaySearchViz = function(requestData){
 }
 
 WDP.displayPostBodies = function(postLinks, countedSet){
+	WDP.posts.total = postLinks.length;
+	WDP.posts.done = 0;
+
 	postLinks.map(function(postLink) {
 		$.ajax({
 			url: WDP.baseUrl + 'data/cl-postbody',
@@ -94,11 +100,15 @@ WDP.displayPostBodies = function(postLinks, countedSet){
 			postBody.split(" ").map(function(word) {
 				countedSet.add(word);
 			});
-			WDP.displayDataForSet(countedSet);
 		})
 		.fail(function() {
 			console.log("Could not retrieve post body");
-		});	
+		}).always(function() {
+			WDP.posts.done++;
+			if(WDP.posts.done >= WDP.posts.total){
+				WDP.displayDataForSet(countedSet);	
+			}
+		});
 	});
 	
 	
@@ -128,6 +138,11 @@ WDP.displayDataForSet = function(countedSet){
 	WDP.displayWordList(sortedCollection);
 	WDP.displayViz(sortedCollection);
 }
+
+WDP.display.counter = function(){
+
+}
+
 
 
 
