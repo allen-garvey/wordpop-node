@@ -3,7 +3,7 @@
 */
 .jumbotron{
 	background-color: lighten($color_primary, 40%);
-	padding: 3em 0;
+	padding: 3em 0 1em 0;
 }
 .jumbotron h1{
 	@include font_brand;
