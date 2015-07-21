@@ -105,6 +105,7 @@ WDP.displayPostBodies = function(postLinks, countedSet){
 			console.log("Could not retrieve post body");
 		}).always(function() {
 			WDP.posts.done++;
+			WDP.display.counter();
 			if(WDP.posts.done >= WDP.posts.total){
 				WDP.displayDataForSet(countedSet);	
 			}
@@ -140,7 +141,7 @@ WDP.displayDataForSet = function(countedSet){
 }
 
 WDP.display.counter = function(){
-
+	document.getElementById('progress-counter').innerHTML = 'Results scanned: ' + WDP.posts.done + '/' + WDP.posts.total;
 }
 
 
