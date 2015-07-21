@@ -20,15 +20,21 @@
 	background-color: lighten($color_secondary, 30%);
 }
 
+.clearfix:after {
+  content:"";
+  display:table;
+  clear:both;
+}
+
 @include media_q(lg){
-	#main_list, .viz_container{
+	#viz-wrapper, #category-bar-graph-wrapper{
 		width: 49%;
 		float: left;
 	}
-	.viz_container{
+	#viz-wrapper{
 		float: left;
 	}
-	#main_list{
+	#category-bar-graph-wrapper{
 		float: right;
 	}
 	#main_list li{
