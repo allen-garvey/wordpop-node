@@ -62,7 +62,7 @@ WDP.displaySearchViz = function(requestData){
 			console.error(searchResults);
 			return;
 		}
-		var set = new WDP.countedSet();
+		var set = new WDP.set.countedSet();
 		var postLinks = [];
 		$(searchResults).find('a.hdrlnk').each(function(index) {
 			var resultsLink = $(this);
