@@ -21,8 +21,14 @@ WDP.set.countedCategorySet.prototype.shouldExcludeItem = function(item){
 WDP.set.countedCategorySetFactory = function(){
 
 }
+/*
+* valid types are: 'musicians', 'programming languages'
+*/
 WDP.set.countedCategorySetFactory.prototype.makeCountedCategorySet = function(type){
-	if(type === 'programmingLanguages'){
+	if(type === 'musicians'){
+		return new WDP.set.countedCategorySet(this.musicianCategories());
+	}
+	else{
 		return new WDP.set.countedCategorySet(this.programmingLanguageCategories());
 	}
 }
@@ -105,6 +111,12 @@ WDP.set.countedCategorySetFactory.prototype.programmingLanguageCategories = func
 		else if(word.match(/\bflask\b/gi)){
 			return 'Flask';
 		}
+		else if(word.match(/\bmagento\b/gi)){
+			return 'Magento';
+		}
+		else if(word.match(/\bshopify\b/gi)){
+			return 'Shopify';
+		}
 		else if(word.match(/\b(oracle|pl\/sql)\b/gi)){
 			return 'Oracle';
 		}
@@ -119,6 +131,12 @@ WDP.set.countedCategorySetFactory.prototype.programmingLanguageCategories = func
 		}
 		else if(word.match(/\b(subversion|svn)\b/gi)){
 			return 'Subversion';
+		}
+		else if(word.match(/\bwix\b/gi)){
+			return 'Wix';
+		}
+		else if(word.match(/\bsquarespace\b/gi)){
+			return 'Squarespace';
 		}
 		else if(word.match(/\blaravel\b/gi)){
 			return 'Laravel';
@@ -138,5 +156,77 @@ WDP.set.countedCategorySetFactory.prototype.programmingLanguageCategories = func
 		else if(word.match(/\bc\b/gi)){
 			return 'C';
 		}
+	}
+}
+
+WDP.set.countedCategorySetFactory.prototype.musicianCategories = function(){
+	return function(word){
+		if(word.match(/\bguitar\b/gi)){
+			return 'Guitar';
+		}
+		else if(word.match(/\bbass\b/gi)){
+			return 'Bass';
+		}
+		else if(word.match(/\bpiano\b/gi)){
+			return 'Piano';
+		}
+		else if(word.match(/\bkeyboards\b/gi)){
+			return 'Keyboards';
+		}
+		else if(word.match(/\b(voice|vocal)\b|\bsing(er)?\b/gi)){
+			return 'Singer';
+		}
+		else if(word.match(/\b(upright|contra)\b/gi)){
+			return 'Upright Bass';
+		}
+		else if(word.match(/\bviolin\b/gi)){
+			return 'Violin';
+		}
+		else if(word.match(/\bdrums\b/gi)){
+			return 'Drums';
+		}
+		else if(word.match(/\bpercussion\b/gi)){
+			return 'Percussion';
+		}
+		else if(word.match(/\bflute\b/gi)){
+			return 'Flute';
+		}
+		else if(word.match(/\bsax(ophone)?\b/gi)){
+			return 'Saxophone';
+		}
+		else if(word.match(/\btrumpet\b/gi)){
+			return 'Trumpet';
+		}
+		else if(word.match(/\bchurch\b/gi)){
+			return 'Church';
+		}
+		else if(word.match(/\bwedding\b/gi)){
+			return 'Wedding';
+		}
+		else if(word.match(/\btrombone\b/gi)){
+			return 'Trombone';
+		}
+		else if(word.match(/\b(choir|chorus)\b/gi)){
+			return 'Chorus';
+		}
+		else if(word.match(/\bcello\b/gi)){
+			return 'Cello';
+		}
+		else if(word.match(/\bviola\b/gi)){
+			return 'Viola';
+		}
+		else if(word.match(/\btuba\b/gi)){
+			return 'Tuba';
+		}
+		else if(word.match(/\bclarinet\b/gi)){
+			return 'Clarinet';
+		}
+		else if(word.match(/\bcompose(r)?\b/gi)){
+			return 'Composer';
+		}
+		else if(word.match(/\bbassoon\b/gi)){
+			return 'Bassoon';
+		}
+		
 	}
 }
