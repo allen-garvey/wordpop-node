@@ -63,7 +63,7 @@ WDP.displaySearchViz = function(requestData){
 			return;
 		}
 		var categorySetFactory = new WDP.set.countedCategorySetFactory();
-		var categorySet = categorySetFactory.makeCountedCategorySet('programmingLanguages');
+		var categorySet = categorySetFactory.makeCountedCategorySet(WDP.models.subCategoryTypeName);
 		var set = new WDP.set.countedSet();
 		var postLinks = [];
 		$(searchResults).find('a.hdrlnk').each(function(index) {

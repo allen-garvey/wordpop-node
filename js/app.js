@@ -20,11 +20,25 @@ WDP.init.searchForm = function(){
 		WDP.displaySearchViz(requestData);
 	});
 
+	searchForm.find('#search_subcategory').on('change', function(event){
+		WDP.init.subCategoryTypeName($(this).val());
+	});
+
 	WDP.init.populateSearchFields();
 	$('#search_category').on('change', function(event) {
 		WDP.init.subcategoriesForCategory();
+		WDP.init.subCategoryTypeName($('#search_form').find('#search_subcategory').val());
 	});
 
+}
+
+WDP.init.subCategoryTypeName = function(subcategory_select_val){
+	if(subcategory_select_val.match(/\b(creative|musicians)\b/gi)){
+			WDP.models.subCategoryTypeName = 'musicians';
+		}
+	else{
+		WDP.models.subCategoryTypeName = 'programming languages';
+	}
 }
 
 WDP.init.populateSearchFields = function(){
