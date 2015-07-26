@@ -30,6 +30,12 @@ var searchModel = {
 									computer : {display : 'Computer', url : 'cpg'},
 									creative : {display : 'Creative', url : 'crg'}
 					}
+			},
+			community : { 
+					display : 'Community', 
+					subcategories :{
+									musicians : {display : 'Musicians', url : 'muc'}
+					}
 			}
 		}	
 	}
