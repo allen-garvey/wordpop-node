@@ -30,13 +30,13 @@ WDP.init.searchForm = function(){
 		WDP.init.subcategoriesForCategory();
 		WDP.init.subCategoryTypeName();
 	});
-
+	WDP.init.subCategoryTypeName();
 }
 
 WDP.init.subCategoryTypeName = function(subcategory_select_val){
 	var currentCategory = $("#search_category option:selected").val();
 	var currentSubcategory = $("#search_subcategory option:selected").val();
-	WDP.models.subCategoryTypeName = WDP.models.cl.categories[currentCategory][currentCategory].categoryType;
+	WDP.models.subCategoryTypeName = WDP.models.cl.categories[currentCategory].subcategories[currentSubcategory].categoryType;
 }
 
 WDP.init.populateSearchFields = function(){
