@@ -7,6 +7,8 @@ WDP.init.searchForm = function(){
     	return false;
 	});
 
+	WDP.init.populateSearchFields();
+
 	searchForm.find("input[type='submit']").on('click', function(event) {
 		var currentCity = $("#search_city option:selected").val();
 		var requestData = {
@@ -21,24 +23,20 @@ WDP.init.searchForm = function(){
 	});
 
 	searchForm.find('#search_subcategory').on('change', function(event){
-		WDP.init.subCategoryTypeName($(this).val());
+		WDP.init.subCategoryTypeName();
 	});
 
-	WDP.init.populateSearchFields();
 	$('#search_category').on('change', function(event) {
 		WDP.init.subcategoriesForCategory();
-		WDP.init.subCategoryTypeName($('#search_form').find('#search_subcategory').val());
+		WDP.init.subCategoryTypeName();
 	});
 
 }
 
 WDP.init.subCategoryTypeName = function(subcategory_select_val){
-	if(subcategory_select_val.match(/\b(creative|musicians)\b/gi)){
-			WDP.models.subCategoryTypeName = 'musicians';
-		}
-	else{
-		WDP.models.subCategoryTypeName = 'programming languages';
-	}
+	var currentCategory = $("#search_category option:selected").val();
+	var currentSubcategory = $("#search_subcategory option:selected").val();
+	WDP.models.subCategoryTypeName = WDP.models.cl.categories[currentCategory][currentCategory].categoryType;
 }
 
 WDP.init.populateSearchFields = function(){

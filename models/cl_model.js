@@ -12,29 +12,31 @@ var searchModel = {
 			buffalo : {display: 'Buffalo', url : 'buffalo'},
 			austin : {display: 'Austin', url : 'austin'},
 			anchorage : {display: 'Anchorage', url : 'anchorage'},
-			portland : {display: 'Portland, OR', url : 'portland'}
+			portland : {display: 'Portland, OR', url : 'portland'},
+			boston : {display: 'Boston', url : 'boston'},
+			washington_dc : {display: 'Washington, D.C.', url : 'washingtondc'}
 		},
 		categories : {
 			jobs : { 
 					display : 'Jobs', 
 					subcategories :{
-									web : {display : 'Web', url : 'web'},
-									software : {display: 'Software', url : 'sof'},
-									internet_engineering : {display : 'Internet Engineering', url : 'eng'},
-									systems_networking : {display : 'Systems/Networking', url : 'sad'}
+									web : {display : 'Web', url : 'web', categoryType: 'programming languages'},
+									software : {display: 'Software', url : 'sof', categoryType: 'programming languages'},
+									internet_engineering : {display : 'Internet Engineering', url : 'eng', categoryType: 'programming languages'},
+									systems_networking : {display : 'Systems/Networking', url : 'sad', categoryType: 'programming languages'}
 					}
 			},
 			gigs : {
 					display : 'Gigs',
 					subcategories: {
-									computer : {display : 'Computer', url : 'cpg'},
-									creative : {display : 'Creative', url : 'crg'}
+									computer : {display : 'Computer', url : 'cpg', categoryType: 'programming languages'},
+									creative : {display : 'Creative', url : 'crg', categoryType: 'programming languages'}
 					}
 			},
 			community : { 
 					display : 'Community', 
 					subcategories :{
-									musicians : {display : 'Musicians', url : 'muc'}
+									musicians : {display : 'Musicians', url : 'muc', categoryType: 'musicians'}
 					}
 			}
 		}	
