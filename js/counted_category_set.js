@@ -31,6 +31,9 @@ WDP.set.countedCategorySetFactory.prototype.makeCountedCategorySet = function(ty
 	else if(type === 'graphic design'){
 		return new WDP.set.countedCategorySet(this.graphicDesignCategories());
 	}
+	else if(type === 'free stuff'){
+		return new WDP.set.countedCategorySet(this.freeStuffCategories());
+	}
 	//'programming languages'
 	else{
 		return new WDP.set.countedCategorySet(this.programmingLanguageCategories());
@@ -280,6 +283,77 @@ WDP.set.countedCategorySetFactory.prototype.graphicDesignCategories = function()
 		}
 		else if(word.match(/\bphotograph(y)?\b/gi)){
 			return 'Photography';
+		}
+	}
+}
+
+WDP.set.countedCategorySetFactory.prototype.freeStuffCategories = function(){
+	return function(word){
+		if(word.match(/\bfirewood\b/gi)){
+			return 'Firewood';
+		}
+		else if(word.match(/\bfurniture\b/gi)){
+			return 'Furniture';
+		}
+		else if(word.match(/\bikea\b/gi)){
+			return 'Ikea';
+		}
+		else if(word.match(/\bt\.?v\.?\b/gi)){
+			return 'TV';
+		}
+		else if(word.match(/\bcouch\b/gi)){
+			return 'Couch';
+		}
+		else if(word.match(/\bbooks?\b/gi)){
+			return 'Books';
+		}
+		else if(word.match(/\bmicrowave\b/gi)){
+			return 'Microwave';
+		}
+		else if(word.match(/\btoilet\b/gi)){
+			return 'Toilet';
+		}
+		else if(word.match(/\btreadmill\b/gi)){
+			return 'Treadmill';
+		}
+		else if(word.match(/\belliptical\b/gi)){
+			return 'Elliptical';
+		}
+		else if(word.match(/\bweights\b/gi)){
+			return 'Weights';
+		}
+		else if(word.match(/\bconcrete\b/gi)){
+			return 'Concrete';
+		}
+		else if(word.match(/\bcd(s)?\b/gi)){
+			return 'CDs';
+		}
+		else if(word.match(/\bshelf\b/gi)){
+			return 'Shelf';
+		}
+		else if(word.match(/\bbike\b/gi)){
+			return 'Bike';
+		}
+		else if(word.match(/\btable\b/gi)){
+			return 'Table';
+		}
+		else if(word.match(/\bshoes\b/gi)){
+			return 'Shoes';
+		}
+		else if(word.match(/\bbed\b/gi)){
+			return 'Bed';
+		}
+		else if(word.match(/\bfuton\b/gi)){
+			return 'Futon';
+		}
+		else if(word.match(/\bchair\b/gi)){
+			return 'Chair';
+		}
+		else if(word.match(/\bguitar\b/gi)){
+			return 'Guitar';
+		}
+		else if(word.match(/\bpiano\b/gi)){
+			return 'Piano';
 		}
 	}
 }

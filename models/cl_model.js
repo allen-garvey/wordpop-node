@@ -23,7 +23,8 @@ var searchModel = {
 									web : {display : 'Web', url : 'web', categoryType: 'programming languages'},
 									software : {display: 'Software', url : 'sof', categoryType: 'programming languages'},
 									internet_engineering : {display : 'Internet Engineering', url : 'eng', categoryType: 'programming languages'},
-									systems_networking : {display : 'Systems/Networking', url : 'sad', categoryType: 'programming languages'}
+									systems_networking : {display : 'Systems/Networking', url : 'sad', categoryType: 'programming languages'},
+									art_media_design : {display : 'Art/Media/Design', url : 'med', categoryType: 'graphic design'}
 					}
 			},
 			gigs : {
@@ -37,6 +38,12 @@ var searchModel = {
 					display : 'Community', 
 					subcategories :{
 									musicians : {display : 'Musicians', url : 'muc', categoryType: 'musicians'}
+					}
+			},
+			for_sale : { 
+					display : 'For Sale', 
+					subcategories :{
+									free : {display : 'Free', url : 'zip', categoryType: 'free stuff'}
 					}
 			}
 		}	
