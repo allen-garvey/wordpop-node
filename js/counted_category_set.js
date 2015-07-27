@@ -28,6 +28,10 @@ WDP.set.countedCategorySetFactory.prototype.makeCountedCategorySet = function(ty
 	if(type === 'musicians'){
 		return new WDP.set.countedCategorySet(this.musicianCategories());
 	}
+	else if(type === 'graphic design'){
+		return new WDP.set.countedCategorySet(this.graphicDesignCategories());
+	}
+	//'programming languages'
 	else{
 		return new WDP.set.countedCategorySet(this.programmingLanguageCategories());
 	}
@@ -226,7 +230,56 @@ WDP.set.countedCategorySetFactory.prototype.musicianCategories = function(){
 		}
 		else if(word.match(/\bbassoon\b/gi)){
 			return 'Bassoon';
+		}		
+	}
+}
+
+WDP.set.countedCategorySetFactory.prototype.graphicDesignCategories = function(){
+	return function(word){
+		if(word.match(/\badobe\b/gi)){
+			return 'Adobe';
 		}
-		
+		else if(word.match(/\bweb\b/gi)){
+			return 'Web';
+		}
+		else if(word.match(/\bfashion\b/gi)){
+			return 'Fashion';
+		}
+		else if(word.match(/\bphotoshop\b/gi)){
+			return 'Photoshop';
+		}
+		else if(word.match(/\billustrator\b/gi)){
+			return 'Illustrator';
+		}
+		else if(word.match(/\bindesign\b/gi)){
+			return 'InDesign';
+		}
+		else if(word.match(/\bwordpress\b/gi)){
+			return 'Wordpress';
+		}
+		else if(word.match(/\bcad\b/gi)){
+			return 'Cad';
+		}
+		else if(word.match(/\bweb\b/gi)){
+			return 'Web';
+		}
+		else if(word.match(/\bsquarespace\b/gi)){
+			return 'Squarespace';
+		}
+		else if(word.match(/\bwix\b/gi)){
+			return 'Wix';
+		}
+		else if(word.match(/\b(ux|ui)\b/gi)){
+			return 'UX';
+		}
+		else if(word.match(/\bquark\b/gi)){
+			return 'Quark';
+		}
+		else if(word.match(/\blogo\b/gi)){
+			return 'Logo';
+		}
+		else if(word.match(/\bphotograph(y)?\b/gi)){
+			return 'Photography';
+		}
 	}
 }
