@@ -3,7 +3,8 @@
 }
 
 @mixin font_brand{
-	font-family: 'AachenBold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: 'Aachen', Times, serif;
+	font-weight: bold;
 	@content;
 }
 @mixin font_heading{
