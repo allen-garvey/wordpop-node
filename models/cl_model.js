@@ -43,7 +43,8 @@ var searchModel = {
 			for_sale : { 
 					display : 'For Sale', 
 					subcategories :{
-									free : {display : 'Free', url : 'zip', categoryType: 'free stuff'}
+									free : {display : 'Free', url : 'zip', categoryType: 'free stuff'},
+									musical_instruments : {display : 'Musical Instruments', url : 'msa', categoryType: 'musicians'}
 					}
 			}
 		}	
