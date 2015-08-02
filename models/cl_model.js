@@ -59,6 +59,17 @@ var searchModel = {
 									free : {display : 'Free', url : 'zip', categoryType: 'free stuff'},
 									musical_instruments : {display : 'Musical Instruments', url : 'msa', categoryType: 'musicians'}
 					}
+			},
+			personals : { 
+					display : 'Personals', 
+					subcategories :{
+									m4w : {display : 'Men Seeking Women', url : 'm4w', categoryType: 'personals'},
+									w4m : {display : 'Women Seeking Men', url : 'w4m', categoryType: 'personals'},
+									m4m : {display : 'Men Seeking Men', url : 'm4w', categoryType: 'personals'},
+									w4w : {display : 'Women Seeking Women', url : 'w4w', categoryType: 'personals'},
+									missed_connections_w4m : {display : 'Missed Connections: w4m', url : 'mis?sort=date&query=w4m', categoryType: 'personals'},
+									missed_connections_m4w : {display : 'Missed Connections: m4w', url : 'mis?sort=date&query=m4w', categoryType: 'personals'}
+					}
 			}
 		}	
 	}
@@ -86,7 +97,15 @@ var urlFromRequest = function(requestData){
 		return 'not valid subcategory';
 		return false;
 	}
-	var queryString = requestData.query ? '?query=' + encodeURIComponent(requestData.query) : '';
+	var queryString = '';
+	if(requestData.query){
+		if(requestData.subcategory.match(/^missed_connections_/)){
+			queryString = '+' + encodeURIComponent(requestData.query);
+		}
+		else{
+			queryString = '?query=' + encodeURIComponent(requestData.query);
+		}
+	}
 	return cityUrl + '/search/' + subcategory.url + queryString;
 }
 
