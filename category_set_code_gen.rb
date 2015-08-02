@@ -1,8 +1,7 @@
 categories_string = <<-eof
-guitar
-piano
+fun
 eof
 
 categories_string.split("\n").each do |category|
-	puts "else if(word.match(/\\b" + category + "\\b/gi)){" + "\n\treturn '" + category.capitalize + "';\n}"
+	puts "else if(word.match(/\\b" + category + "\\b/gi)){" + "\n\treturn '" + category.capitalize.gsub(/\W/, '') + "';\n}"
 end
