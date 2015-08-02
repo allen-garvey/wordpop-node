@@ -34,6 +34,9 @@ WDP.set.countedCategorySetFactory.prototype.makeCountedCategorySet = function(ty
 	else if(type === 'free stuff'){
 		return new WDP.set.countedCategorySet(this.freeStuffCategories());
 	}
+	else if(type === 'personals'){
+		return new WDP.set.countedCategorySet(this.personalsCategories());
+	}
 	//'programming languages'
 	else{
 		return new WDP.set.countedCategorySet(this.programmingLanguageCategories());
@@ -354,6 +357,214 @@ WDP.set.countedCategorySetFactory.prototype.freeStuffCategories = function(){
 		}
 		else if(word.match(/\bpiano\b/gi)){
 			return 'Piano';
+		}
+	}
+}
+WDP.set.countedCategorySetFactory.prototype.personalsCategories = function(){
+	return function(word){
+		if(word.match(/\bman\b/gi)){
+			return 'Man';
+		}
+		else if(word.match(/\bmasculine\b/gi)){
+			return 'Masculine';
+		}
+		else if(word.match(/\bfeminine\b/gi)){
+			return 'Feminine';
+		}
+		else if(word.match(/\beyes\b/gi)){
+			return 'Eyes';
+		}
+		else if(word.match(/\bblonde?\b/gi)){
+			return 'Blonde';
+		}
+		else if(word.match(/\bbrunette\b/gi)){
+			return 'Brunette';
+		}
+		else if(word.match(/\bblue\b/gi)){
+			return 'Blue';
+		}
+		else if(word.match(/\bbrown\b/gi)){
+			return 'Brown';
+		}
+		else if(word.match(/\bgreen\b/gi)){
+			return 'Green';
+		}
+		else if(word.match(/\bred\b/gi)){
+			return 'Red';
+		}
+		else if(word.match(/\bviolet|purple\b/gi)){
+			return 'Purple';
+		}
+		else if(word.match(/\borange\b/gi)){
+			return 'Orange';
+		}
+		else if(word.match(/\byellow\b/gi)){
+			return 'Yellow';
+		}
+		else if(word.match(/\bmuscles\b/gi)){
+			return 'Muscles';
+		}
+		else if(word.match(/\bstars?\b/gi)){
+			return 'Stars';
+		}
+		else if(word.match(/\bcar\b/gi)){
+			return 'Car';
+		}
+		else if(word.match(/\bbreasts?\b/gi)){
+			return 'Breasts';
+		}
+		else if(word.match(/\barms?\b/gi)){
+			return 'Arms';
+		}
+		else if(word.match(/\bteeth\b/gi)){
+			return 'Teeth';
+		}
+		else if(word.match(/\bhair\b/gi)){
+			return 'Hair';
+		}
+		else if(word.match(/\bshoes?\b/gi)){
+			return 'Shoes';
+		}
+		else if(word.match(/\bmoney\b/gi)){
+			return 'Money';
+		}
+		else if(word.match(/\brandom\b/gi)){
+			return 'Random';
+		}
+		else if(word.match(/\bstranger\b/gi)){
+			return 'Stranger';
+		}
+		else if(word.match(/\bhello\b/gi)){
+			return 'Hello';
+		}
+		else if(word.match(/\bhi\b/gi)){
+			return 'Hi';
+		}
+		else if(word.match(/\bvacation\b/gi)){
+			return 'Vacation';
+		}
+		else if(word.match(/\bsex\b/gi)){
+			return 'Sex';
+		}
+		else if(word.match(/\bboy\b/gi)){
+			return 'Boy';
+		}
+		else if(word.match(/\bgirl\b/gi)){
+			return 'Girl';
+		}
+		else if(word.match(/\bwoman\b/gi)){
+			return 'Woman';
+		}
+		else if(word.match(/\bblack\b/gi)){
+			return 'Black';
+		}
+		else if(word.match(/\basian\b/gi)){
+			return 'Asian';
+		}
+		else if(word.match(/\bhispanic\b/gi)){
+			return 'Hispanic';
+		}
+		else if(word.match(/\bwhite\b/gi)){
+			return 'White';
+		}
+		else if(word.match(/\bskinny\b/gi)){
+			return 'Skinny';
+		}
+		else if(word.match(/\btall\b/gi)){
+			return 'Tall';
+		}
+		else if(word.match(/\bshort\b/gi)){
+			return 'Short';
+		}
+		else if(word.match(/\bbbw\b/gi)){
+			return 'bbw';
+		}
+		else if(word.match(/\bherpes\b/gi)){
+			return 'Herpes';
+		}
+		else if(word.match(/\bhookups?\b/gi)){
+			return 'Hookups';
+		}
+		else if(word.match(/\bhiv\+?\b/gi)){
+			return 'Hiv';
+		}
+		else if(word.match(/\bboots?\b/gi)){
+			return 'Boots';
+		}
+		else if(word.match(/\bdress\b/gi)){
+			return 'Dress';
+		}
+		else if(word.match(/\bjeans\b/gi)){
+			return 'Jeans';
+		}
+		else if(word.match(/\bsuit\b/gi)){
+			return 'Suit';
+		}
+		else if(word.match(/\btattoos?\b/gi)){
+			return 'Tattoos';
+		}
+		else if(word.match(/\bpiercings?\b/gi)){
+			return 'Piercings';
+		}
+		else if(word.match(/\bearring\b/gi)){
+			return 'Earring';
+		}
+		else if(word.match(/\bpunk\b/gi)){
+			return 'Punk';
+		}
+		else if(word.match(/\brock\b/gi)){
+			return 'Rock';
+		}
+		else if(word.match(/\bmusic\b/gi)){
+			return 'Music';
+		}
+		else if(word.match(/\bmovies?\b/gi)){
+			return 'Movies';
+		}
+		else if(word.match(/\badventure\b/gi)){
+			return 'Adventure';
+		}
+		else if(word.match(/\bbeach\b/gi)){
+			return 'Beach';
+		}
+		else if(word.match(/\bdrink\b/gi)){
+			return 'Drink';
+		}
+		else if(word.match(/\bcoffee\b/gi)){
+			return 'Coffee';
+		}
+		else if(word.match(/\bcook\b/gi)){
+			return 'Cook';
+		}
+		else if(word.match(/\bclean\b/gi)){
+			return 'Clean';
+		}
+		else if(word.match(/\bstd\b/gi)){
+			return 'STD';
+		}
+		else if(word.match(/\bdrunk\b/gi)){
+			return 'Drunk';
+		}
+		else if(word.match(/\bdrugs\b/gi)){
+			return 'Drugs';
+		}
+		else if(word.match(/\b420\b/gi)){
+			return '420';
+		}
+		else if(word.match(/\bjob\b/gi)){
+			return 'Job';
+		}
+		else if(word.match(/\bfuck\b/gi)){
+			return 'Fuck';
+		}
+		else if(word.match(/\bfetish\b/gi)){
+			return 'Fetish';
+		}
+		else if(word.match(/\bfriends?\b/gi)){
+			return 'Friends';
+		}
+		else if(word.match(/\bfun\b/gi)){
+			return 'Fun';
 		}
 	}
 }
