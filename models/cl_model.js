@@ -18,7 +18,7 @@ var searchModel = {
 			los_angeles : {display: 'Los Angeles', url : 'losangeles'},
 			las_vegas : {display : 'Las Vegas', url : 'lasvegas'},
 			minneapolis : {display : 'Minneapolis', url : 'minneapolis'},
-			philadelpia : {display : 'Philadelpia', url : 'philadelpia'},
+			philadelphia : {display : 'Philadelphia', url : 'philadelphia'},
 			phoenix : {display : 'Phoenix', url : 'phoenix'},
 			pittsburgh : {display : 'Pittsburgh', url : 'pittsburgh'},
 			portland : {display: 'Portland, OR', url : 'portland'},
