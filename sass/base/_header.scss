@@ -1,12 +1,37 @@
 /**
 * Header and nav styles
 */
+.brand{
+	@include font_brand;
+}
 .jumbotron{
 	background-color: lighten($color_primary, 40%);
-	padding: 3em 0 1em 0;
+	padding: 0 0 1em 0;
 }
 .jumbotron h1{
-	@include font_brand;
 	@include font_size(5);
 	margin: 0;
+}
+
+nav{
+	@include font_heading;
+	background-color: darken($color_primary, 30%);
+	padding: 0.5rem 0;
+	margin:0 0 1rem 0;
+}
+nav .brand{
+	@include font_size(2);
+}
+nav ul{
+	list-style-type: none;
+	display: inline-block;
+	float: right;
+	color: $color_background_main;
+		margin-top: -10px;
+}
+nav ul li{
+	position: relative;
+	display: inline;
+	top: 1.2em;
+
 }
