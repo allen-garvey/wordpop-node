@@ -73,6 +73,12 @@ WDP.set.countedCategorySetFactory.prototype.programmingLanguageCategories = func
 		else if(word.match(/\bwordpress\b/gi)){
 			return 'WordPress';
 		}
+		else if(word.match(/\bwindows\b/gi)){
+			return 'Windows';
+		}
+		else if(word.match(/\b(mac|apple)\b/gi)){
+			return 'Mac';
+		}
 		else if(word.match(/\bnode(.js|js)?\b/gi)){
 			return 'Node';
 		}
@@ -114,6 +120,63 @@ WDP.set.countedCategorySetFactory.prototype.programmingLanguageCategories = func
 		}
 		else if(word.match(/\bdjango\b/gi)){
 			return 'Django';
+		}
+		else if(word.match(/\bjquery\b/gi)){
+			return 'jQuery';
+		}
+		else if(word.match(/\bangular\b/gi)){
+			return 'Angular';
+		}
+		else if(word.match(/\bember\b/gi)){
+			return 'Ember';
+		}
+		else if(word.match(/\bbackbone\b/gi)){
+			return 'Backbone';
+		}
+		else if(word.match(/\bknockout\b/gi)){
+			return 'Knockout';
+		}
+		else if(word.match(/\bperl\b/gi)){
+			return 'Perl';
+		}
+		else if(word.match(/\bhaskell\b/gi)){
+			return 'Haskell';
+		}
+		else if(word.match(/\bocaml\b/gi)){
+			return 'OCaml';
+		}
+		else if(word.match(/\bmatlab\b/gi)){
+			return 'Matlab';
+		}
+		else if(word.match(/\bxml\b/gi)){
+			return 'XML';
+		}
+		else if(word.match(/\bxsl\b/gi)){
+			return 'XSL';
+		}
+		else if(word.match(/\bcucumber\b/gi)){
+			return 'Cucumber';
+		}
+		else if(word.match(/\bjunit\b/gi)){
+			return 'JUnit';
+		}
+		else if(word.match(/\brspec\b/gi)){
+			return 'RSpec';
+		}
+		else if(word.match(/\bcobol\b/gi)){
+			return 'COBOL';
+		}
+		else if(word.match(/\bfortran\b/gi)){
+			return 'Fortran';
+		}
+		else if(word.match(/\bml\b/gi)){
+			return 'ML';
+		}
+		else if(word.match(/\bd3(\.js)?\b/gi)){
+			return 'D3.js';
+		}
+		else if(word.match(/\br\b/gi)){
+			return 'R';
 		}
 		else if(word.match(/\bgo-?lang\b/gi)){
 			return 'Go-lang';
