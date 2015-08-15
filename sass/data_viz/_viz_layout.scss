@@ -15,18 +15,3 @@
 	}
 }
 
-
-#main_list{
-	list-style-position: inside;
-	padding: 0;
-	overflow-x:hidden; //causes huge horizontal scrollbar on mobile with no content for some reason without this
-}
-
-#main_list li{
-	@include font_size(1);
-	padding: 0.5em $universal_padding_left_right;
-}
-
-#main_list li:nth-child(even){
-	background-color: lighten($color_secondary, 30%);
-}
