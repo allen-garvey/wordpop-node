@@ -1,5 +1,6 @@
 categories_string = <<-eof
-fun
+windows
+(mac|apple)
 eof
 
 categories_string.split("\n").each do |category|
