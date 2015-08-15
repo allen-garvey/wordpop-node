@@ -6,20 +6,15 @@
 .viz_container{
 	margin-bottom: 2em;
 }
+
 @include media_q(lg){
-	#viz-wrapper, #category-bar-graph-wrapper{
+	.viz_subcontainer{
 		width: 49%;
-	}
-	#viz-wrapper{
-		float: left;
-	}
-	#category-bar-graph-wrapper{
-		float: right;
-	}
-	#main_list li{
-		@include font_size(-1);
+		display: inline-block;
+		vertical-align: top;
 	}
 }
+
 
 #main_list{
 	list-style-position: inside;
