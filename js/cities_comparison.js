@@ -27,7 +27,8 @@ WDP.cc.init = function(){
 WDP.cc.getCityResults = function(searchResults, requestData){
 	WDP.cc.count.done += 1;
 	var searchNum = $(searchResults).find('a.hdrlnk').length;
-	WDP.cc.set.setCountForItem(requestData.city, WDP.cc.set.countForItem(requestData.city) + searchNum);
+	var key = WDP.models.cl.cities[requestData.city].display
+	WDP.cc.set.setCountForItem(key, WDP.cc.set.countForItem(key) + searchNum);
 	if(WDP.cc.count.done === WDP.cc.count.total){
 		WDP.error.clear();
 		WDP.cc.clearBarChart();
