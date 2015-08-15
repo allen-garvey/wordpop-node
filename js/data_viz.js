@@ -1,5 +1,6 @@
 WDP.display = {};
 WDP.posts = {};
+WDP.detailViz = {}; //toplevel container for city detail viz
 
 WDP.displayViz = function(data){
 	//height and width of svg
@@ -46,9 +47,37 @@ WDP.displayViz = function(data){
 	});
 	*/
 }
+/*
+* called to init detail viz when getCraigslist data finishes
+*/
+WDP.detailViz.init = function(searchResults){
+	WDP.error.clear();
+	var categorySetFactory = new WDP.set.countedCategorySetFactory();
+	var categorySet = categorySetFactory.makeCountedCategorySet(WDP.models.subCategoryTypeName);
+	var set = new WDP.set.countedSet();
+	var postLinks = [];
+	$(searchResults).find('a.hdrlnk').each(function(index) {
+		var resultsLink = $(this);
+		var title = resultsLink.text();
+		var link = resultsLink.attr("href");
+		//don't add links to nearby cities
+		if(!link.match(/^http:/)){
+			postLinks.push(link);
+		}
+		title.split(" ").map(function(word) {
+			set.add(word);
+			categorySet.add(word);
+		});
+	});
+	WDP.displayDataForSet(set, categorySet);
+	WDP.displayPostBodies(postLinks, set, categorySet);
+}
 
-
-WDP.displaySearchViz = function(requestData){
+/*
+* Request data is WDP.init.CraigslistRequestData object
+* successFunc is called on success with no errors, takes parameter of the data returned, optional parameter of original requestData
+*/
+WDP.getCLPage = function(requestData, successFunc){
 	$.ajax({
 		url: WDP.baseUrl + 'data',
 		type: 'POST',
@@ -58,32 +87,14 @@ WDP.displaySearchViz = function(requestData){
 
 	.done(function(searchResults) {
 		if(searchResults.match(/^This IP has been automatically blocked./i)){
-			WDP.displayError("Sorry, but it appears that Craigslist has blocked this site from collecting data.");
+			WDP.error.display("Sorry, but it appears that Craigslist has blocked this site from collecting data.");
 			console.error(searchResults);
 			return;
 		}
-		var categorySetFactory = new WDP.set.countedCategorySetFactory();
-		var categorySet = categorySetFactory.makeCountedCategorySet(WDP.models.subCategoryTypeName);
-		var set = new WDP.set.countedSet();
-		var postLinks = [];
-		$(searchResults).find('a.hdrlnk').each(function(index) {
-			var resultsLink = $(this);
-			var title = resultsLink.text();
-			var link = resultsLink.attr("href");
-			//don't add links to nearby cities
-			if(!link.match(/^http:/)){
-				postLinks.push(link);
-			}
-			title.split(" ").map(function(word) {
-				set.add(word);
-				categorySet.add(word);
-			});
-		});
-		WDP.displayDataForSet(set, categorySet);
-		WDP.displayPostBodies(postLinks, set, categorySet);
+		successFunc(searchResults, requestData);
 	})
 	.fail(function(jqXHR, textStatus, error) {
-		WDP.displayError("Sorry, could not connect to Craigslist.");
+		WDP.error.display("Sorry, could not connect to Craigslist.");
 	});
 }
 
@@ -138,7 +149,7 @@ WDP.displayDataForSet = function(countedSet, categorySet){
 	var sortedCollection = countedSet.getSortedCollection();
 	WDP.resetViz();
 	if(sortedCollection.length === 0){
-		WDP.displayError("Sorry, no results found.");
+		WDP.error.display("Sorry, no results found.");
 		return;
 	}
 	WDP.displayWordList(sortedCollection);
@@ -162,8 +173,6 @@ WDP.display.counter = function(){
 
 WDP.display.categoryBarChart = function(categorySet){
 	var sortedCollection = categorySet.getSortedCollection();
-
-
 	var xDomain = d3.extent(sortedCollection, function(d){
         return d.amount;
     });
