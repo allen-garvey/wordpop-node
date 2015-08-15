@@ -1,6 +1,14 @@
 WDP.models = {};
 WDP.init = {};
 
+WDP.init.CraigslistRequestData = function(city, category, subcategory, query){
+	this.domain = 'craigslist';
+	this.city = city;
+	this.category = category;
+	this.subcategory = subcategory;
+	this.query = query;
+}
+
 WDP.init.searchForm = function(){
 	var searchForm = $("#search_form");
 	searchForm.submit(function(e){
@@ -11,15 +19,12 @@ WDP.init.searchForm = function(){
 
 	searchForm.find("input[type='submit']").on('click', function(event) {
 		var currentCity = $("#search_city option:selected").val();
-		var requestData = {
-							domain : 'craigslist',
-							city : currentCity,
-							category : $("#search_category option:selected").val(),
-							subcategory : $("#search_subcategory option:selected").val(),
-							query : $("#search_query").val()
-						};
+		var requestData = new WDP.init.CraigslistRequestData(currentCity, 
+															$("#search_category option:selected").val(), 
+															$("#search_subcategory option:selected").val(), 
+															$("#search_query").val());
 		WDP.models.currentCity = currentCity;
-		WDP.displaySearchViz(requestData);
+		WDP.getCLPage(requestData, function(searchResults){WDP.detailViz.init(searchResults)});
 	});
 
 	searchForm.find('#search_subcategory').on('change', function(event){
@@ -62,4 +67,7 @@ WDP.init.subcategoriesForCategory = function(){
 }
 if(WDP.page === 'home'){
 	WDP.init.searchForm();	
+}
+else{
+	WDP.cc.init();
 }
