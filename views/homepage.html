@@ -15,7 +15,7 @@
                 <div class='container'>
                     <a href='/'><span class='brand'>Wordpop</span></a>
                     <ul>
-                        <a href='/'><li>Cities Detail</li></a>
+                        <a href='/'><li>City Comparison</li></a>
                     </ul>
                 </div>
             </nav>
@@ -25,14 +25,21 @@
             </div>
             <div class='container'>
                 <form method='GET' id='search_form'>
-                    <select name='search_city' id='search_city'>
-                    </select>
-                    <select name='search_category' id='search_category'>
-                    </select>
-                    <select name='search_subcategory' id='search_subcategory'>
-                    </select>
-                    <input type="search" placeholder="Search Craigslist" name='search_query' id='search_query' />
-                    <input type="submit" id="submit_button"/>
+                    <div class='form-group'>
+                        <select name='search_city' id='search_city'></select>
+                    </div>
+                    <div class='form-group'>
+                        <select name='search_category' id='search_category'></select>
+                                    </div>
+                    <div class='form-group'>
+                        <select name='search_subcategory' id='search_subcategory'></select>
+                    </div>
+                    <div class='form-group'>
+                        <input type="search" placeholder="Search Craigslist" name='search_query' id='search_query' />
+                    </div>
+                    <div class='form-group'>
+                        <input type="submit" id="submit_button"/>
+                    </div>
                 </form>
             </div>
             <div class='progress_counter_container' id='progress-counter'></div>
