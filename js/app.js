@@ -60,6 +60,6 @@ WDP.init.subcategoriesForCategory = function(){
 	document.getElementById('search_subcategory_optgroup').innerHTML = '';
 	WDP.init.select($('#search_subcategory optgroup'), WDP.models.cl.categories[$("#search_category option:selected").val()].subcategories);	
 }
-
-WDP.init.searchForm();
-
+if(WDP.page === 'home'){
+	WDP.init.searchForm();	
+}
