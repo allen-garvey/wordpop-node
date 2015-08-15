@@ -43,8 +43,8 @@ WDP.init.populateSearchFields = function(){
 	$.getJSON(WDP.baseUrl + 'data/cl.json', function(searchModel) {
 		var model = searchModel.craigslist;
 		WDP.models.cl = model;
-		WDP.init.select($('#search_city'), model.cities);
-		WDP.init.select($('#search_category'), model.categories);
+		WDP.init.select($('#search_city optgroup'), model.cities);
+		WDP.init.select($('#search_category optgroup'), model.categories);
 		WDP.init.subcategoriesForCategory();
 
 	});	
@@ -57,8 +57,8 @@ WDP.init.select = function(parentSelect, model){
 }
 
 WDP.init.subcategoriesForCategory = function(){
-	document.getElementById('search_subcategory').innerHTML = '';
-	WDP.init.select($('#search_subcategory'), WDP.models.cl.categories[$("#search_category option:selected").val()].subcategories);	
+	document.getElementById('search_subcategory_optgroup').innerHTML = '';
+	WDP.init.select($('#search_subcategory optgroup'), WDP.models.cl.categories[$("#search_category option:selected").val()].subcategories);	
 }
 
 WDP.init.searchForm();

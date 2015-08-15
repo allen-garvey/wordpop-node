@@ -26,13 +26,22 @@
             <div class='container'>
                 <form method='GET' id='search_form'>
                     <div class='form-group'>
-                        <select name='search_city' id='search_city'></select>
+                        <select name='search_city' id='search_city'>
+                            <optgroup label='City'>
+                            </optgroup>
+                        </select>
                     </div>
                     <div class='form-group'>
-                        <select name='search_category' id='search_category'></select>
-                                    </div>
+                        <select name='search_category' id='search_category'>
+                            <optgroup label='Category'>
+                            </optgroup>
+                        </select>
+                    </div>
                     <div class='form-group'>
-                        <select name='search_subcategory' id='search_subcategory'></select>
+                        <select name='search_subcategory' id='search_subcategory'>
+                            <optgroup label='Subcategory' id='search_subcategory_optgroup'>
+                            </optgroup>
+                        </select>
                     </div>
                     <div class='form-group'>
                         <input type="search" placeholder="Search Craigslist" name='search_query' id='search_query' />
