@@ -120,7 +120,7 @@ WDP.displayPostBodies = function(postLinks, countedSet, categorySet){
 			console.log("Could not retrieve post body");
 		}).always(function() {
 			WDP.posts.done++;
-			WDP.display.counter();
+			WDP.display.counter(WDP.posts.done, WDP.posts.total);
 			if(WDP.posts.done >= WDP.posts.total){
 				WDP.displayDataForSet(countedSet, categorySet);
 			}
@@ -157,16 +157,14 @@ WDP.displayDataForSet = function(countedSet, categorySet){
 	WDP.display.categoryBarChart(categorySet);
 }
 
-WDP.display.counter = function(){
-	document.getElementById('progress-counter').innerHTML = 'Results scanned: ' + WDP.posts.done + '/' + WDP.posts.total;
-	if(WDP.posts.done === WDP.posts.total){
+WDP.display.counter = function(amount_done, amount_total){
+	document.getElementById('progress-counter').innerHTML = 'Results scanned: ' + amount_done + '/' + amount_total;
+	if(amount_done === amount_total){
 		document.getElementById('progress_bar').style.width = '0%';
 	}
 	//don't continually update for performance reasons
-	else if(WDP.posts.done % 20 === 0){
-		var done = WDP.posts.done;
-		var total = WDP.posts.total;
-		document.getElementById('progress_bar').style.width = done / total * 100 + '%';
+	else if(amount_done / amount_total * 100 % 20 === 0){
+		document.getElementById('progress_bar').style.width = Math.floor(amount_done / amount_total * 100) + '%';
 	}
 }
 
