@@ -2,5 +2,5 @@
 	@include font_size(1);
 	background-color: $color_secondary;
 	white-space: nowrap;
-	padding : 0.3em; 
+	padding : 0.3em $universal_padding_left_right; 
 }

@@ -4,6 +4,7 @@
 .container{
 	max-width: $container_width;
 	margin: 0 auto;
+	padding : 0 $universal_padding_left_right;
 }
 
 .clearfix:after {
