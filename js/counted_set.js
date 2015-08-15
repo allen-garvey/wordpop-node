@@ -29,13 +29,16 @@ WDP.set.countedSet.prototype.shouldExcludeItem = function(item){
 	return !item.match(/[a-zA-z0-9]/) || item.match(/^(and|to|a|the|of|for|in|with|is|be|our|as|an|or|on|are)$/);
 }
 
-WDP.set.countedSet.prototype.countForObject = function(itemName) {
+WDP.set.countedSet.prototype.countForItem = function(itemName) {
 	return this.collection[itemName] ? this.collection[itemName] : 0;
 };
 
 WDP.set.countedSet.prototype.getCollection = function() {
 	return this.collection;
 };
+WDP.set.countedSet.prototype.setCountForItem = function(item, count){
+	this.collection[item] = count;
+}
 
 /*
 * Returns an array sorted in descending order of name and amount
