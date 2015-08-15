@@ -6,39 +6,8 @@
 	margin: 0 auto;
 }
 
-#main_list{
-	list-style-position: inside;
-	padding: 0;
-}
-
-#main_list li{
-	@include font_size(1);
-	padding: 0.5em 0;
-}
-
-#main_list li:nth-child(even){
-	background-color: lighten($color_secondary, 30%);
-}
-
 .clearfix:after {
   content:"";
   display:table;
   clear:both;
-}
-
-@include media_q(lg){
-	#viz-wrapper, #category-bar-graph-wrapper{
-		width: 49%;
-		float: left;
-	}
-	#viz-wrapper{
-		float: left;
-	}
-	#category-bar-graph-wrapper{
-		float: right;
-	}
-	#main_list li{
-		@include font_size(-1);
-		padding: 0.5em 0;
-	}
 }
