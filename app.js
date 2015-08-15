@@ -20,6 +20,9 @@ var responseOptions = {
 app.get('/', function (req, res) {
     res.sendFile('views/homepage.html', responseOptions);
 });
+app.get('/cities-comparison', function (req, res) {
+    res.sendFile('views/cities_comparison.html', responseOptions);
+});
 
 app.post('/data', function (req, res) {
     // console.log(req.body);
