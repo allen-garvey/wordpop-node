@@ -182,7 +182,7 @@ WDP.display.categoryBarChart = function(categorySet){
   		.enter().append("div")
   		.attr('class', 'bar_chart_bar')
     	.style("width", function(d) { return xScale(d.amount) * 100 + "%"; })
-    	.text(function(d) { return d.name + ' (' + d.amount + ')'; });
+    	.text(function(d) { return d.name + ' (' + WDP.util.formatNumber(d.amount) + ')'; });
 }
 
 
