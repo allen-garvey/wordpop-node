@@ -4,7 +4,7 @@ Wordpop is a web application using node.js, D3.js and jQuery that creates a dyna
 
 ##Dependencies
 
-* node 0.12.7 or later
+* node 0.12.7 or higher
 * Gulp 3.9.* or higher 
 * npm to install dependencies
 * sass to compile Sass files
