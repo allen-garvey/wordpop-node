@@ -1,6 +1,6 @@
 #Wordpop
 
-Node webapp to display word popularity in a Craigslist search.
+Wordpop is a web application using node.js, D3.js and jQuery that creates a dynamic infographic to display the popularity of words in Craigslist listings. It can also compare the number of software developer job listings across different cities.
 
 ##Dependencies
 
