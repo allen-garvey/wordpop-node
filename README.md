@@ -16,7 +16,7 @@ Wordpop is a web application using node.js, D3.js and jQuery that creates a dyna
 * If you do not have Gulp installed type `npm install gulp -g` or `sudo npm install gulp -g` to install Gulp
 * Type `gulp build` to compile raw js files
 * If you do not have Sass already installed, type `gem install sass` or `sudo gem install sass` to install Sass
-* Type `sass sass/master.scss public_html/styles/master.css` to complie Sass source files
+* Type `sass sass/master.scss public_html/styles/master.css` to compile Sass source files
 * Type `npm start` to start the node server
 * Navigate your web browser of choice to http://localhost:3000 to view the app
 
