@@ -67,6 +67,12 @@ WDP.set.countedCategorySetFactory.prototype.programmingLanguageCategories = func
 		else if(word.match(/\b(c#|.net)\b/gi)){
 			return 'C#';
 		}
+		else if(word.match(/\bLAMP\b/g)){
+			return 'LAMP';
+		}
+		else if(word.match(/\bMEAN\b/g)){
+			return 'MEAN';
+		}
 		else if(word.match(/\bphp\b/gi)){
 			return 'PHP';
 		}
@@ -130,14 +136,26 @@ WDP.set.countedCategorySetFactory.prototype.programmingLanguageCategories = func
 		else if(word.match(/\bember\b/gi)){
 			return 'Ember';
 		}
+		else if(word.match(/\bmongo|mongodb\b/gi)){
+			return 'MongoDB';
+		}
 		else if(word.match(/\bbackbone\b/gi)){
 			return 'Backbone';
+		}
+		else if(word.match(/\breact\b/gi)){
+			return 'React';
 		}
 		else if(word.match(/\bknockout\b/gi)){
 			return 'Knockout';
 		}
 		else if(word.match(/\bperl\b/gi)){
 			return 'Perl';
+		}
+		else if(word.match(/\berlang\b/gi)){
+			return 'Erlang';
+		}
+		else if(word.match(/\belixir\b/gi)){
+			return 'Elixir';
 		}
 		else if(word.match(/\bhaskell\b/gi)){
 			return 'Haskell';
