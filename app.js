@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var http = require('http');
 var bodyParser = require('body-parser');
+var $ = require('cheerio');
+var request = require('request');
 var CLModel = require('./models/cl_model');
 
 app.use(express.static('public_html'));
@@ -24,18 +26,53 @@ app.get('/cities-comparison', function (req, res) {
     res.sendFile('views/cities_comparison.html', responseOptions);
 });
 
-app.post('/data', function (req, res) {
-    // console.log(req.body);
+app.post('/data.json', function (req, res) {
     var reqUrl = CLModel.urlFromRequest(req.body);
-    if(reqUrl.match(/^http:/)){
-        http.get(reqUrl, function(searchResponse) {
-            searchResponse.pipe(res);
-        }); 
-    }
-    else{
+    
+    if(!reqUrl.match(/^http:/)){
         res.status(400).send('400 Bad request');
+        return;
     }
+
+    request(reqUrl, function(error, response, html){
+        if (error){
+            console.error(err);
+            res.status(500).send('Could not connect to ' + reqUrl);
+        }
+        var parsedHTML = $.load(html);
+        var posts = [];
+        parsedHTML('a.hdrlnk').map(function(i, element) {
+            var resultsLink = $(element);
+            var title = resultsLink.text();
+            var link = resultsLink.attr('href');
+            //don't add links to nearby cities
+            var postLink = link.match(/^http:/) ? null : link;
+
+            posts.push({title : title, url: postLink});
+        });
+        res.json({posts: posts});
+    });
 });
+
+function gotHTML(err, resp, html) {
+    if (err){
+        return console.error(err);
+    }
+    var parsedHTML = $.load(html);
+    var posts = [];
+    parsedHTML('a.hdrlnk').map(function(i, element) {
+        var resultsLink = $(element);
+        var title = resultsLink.text();
+        var link = resultsLink.attr('href');
+        //don't add links to nearby cities
+        var postLink = null;
+        if(!link.match(/^http:/)){
+            postLink = link
+        }
+        posts.push({title : title, url: postLink});
+    });
+    return {posts: posts};
+}
 
 app.get('/data/cl.json', function (req, res) {
     res.send(CLModel.model);

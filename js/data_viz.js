@@ -56,15 +56,14 @@ WDP.detailViz.init = function(searchResults){
 	var categorySet = categorySetFactory.makeCountedCategorySet(WDP.models.subCategoryTypeName);
 	var set = new WDP.set.countedSet();
 	var postLinks = [];
-	$(searchResults).find('a.hdrlnk').each(function(index) {
-		var resultsLink = $(this);
-		var title = resultsLink.text();
-		var link = resultsLink.attr("href");
+	searchResults.posts.forEach(function(post){
+		var title = post.title;
+		var url = post.url;
 		//don't add links to nearby cities
-		if(!link.match(/^http:/)){
-			postLinks.push(link);
+		if(url){
+			postLinks.push(url);
 		}
-		title.split(" ").map(function(word) {
+		title.split().map(function(word) {
 			set.add(word);
 			categorySet.add(word);
 		});
@@ -79,16 +78,14 @@ WDP.detailViz.init = function(searchResults){
 */
 WDP.getCLPage = function(requestData, successFunc){
 	$.ajax({
-		url: WDP.baseUrl + 'data',
+		url: WDP.baseUrl + 'data.json',
 		type: 'POST',
-		dataType: 'html',
+		// dataType: 'html',
 		data: requestData
 	})
-
-	.done(function(searchResults) {
-		if(searchResults.match(/^This IP has been automatically blocked./i)){
-			WDP.error.display("Sorry, but it appears that Craigslist has blocked this site from collecting data.");
-			console.error(searchResults);
+	.done(function(searchResults){
+		if(!searchResults.posts){
+			WDP.error.display("Sorry, could not connect to Craigslist.");
 			return;
 		}
 		successFunc(searchResults, requestData);
