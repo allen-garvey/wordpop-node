@@ -5,8 +5,16 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var maps = require('gulp-sourcemaps');
+var sass = require('gulp-sass');
 
-var scriptsOutputDir = 'public_html/scripts';
+var outputDir = 'public_html/';
+var scriptsOutputDir = outputDir + 'scripts';
+var sassOutputDir = outputDir + 'styles';
+var sassOptions = {
+					  errLogToConsole: true,
+					  // sourceComments: true, //turns on line number comments 
+					  outputStyle: 'compressed' //options: expanded, nested, compact, compressed
+					};
 
 gulp.task('concatScripts', function(){
 	return gulp.src(['js/wordpop_util.js', 'js/counted_set.js', 'js/counted_category_set.js', 'js/data_viz.js', 'js/cities_comparison.js', 'js/app.js'])
@@ -26,5 +34,18 @@ gulp.task('watchScripts', function(){
 	gulp.watch('js/**/*.js', ['minifyScripts']);
 });
 
-gulp.task('build', ['minifyScripts']);
+/*
+* Sass/Styles Tasks
+*/
+gulp.task('sass', function() {
+    gulp.src('sass/' + '**/*.scss')
+        .pipe(sass(sassOptions).on('error', sass.logError))
+        .pipe(gulp.dest(sassOutputDir));
+});
+
+gulp.task('watchSass',function() {
+    gulp.watch(config.styles.SOURCE_DIR + '**/*.scss', ['sass']);
+});
+
+gulp.task('build', ['minifyScripts', 'sass']);
 gulp.task('default', ['build']);
