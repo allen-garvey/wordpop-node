@@ -11,14 +11,10 @@ WDP.init.CraigslistRequestData = function(city, category, subcategory, query){
 
 WDP.init.searchForm = function(){
 	var searchForm = $("#search_form");
-	searchForm.submit(function(e){
-    	return false;
-	});
 
-	WDP.init.populateSearchFields();
-
-	searchForm.find("input[type='submit']").on('click', function(event) {
-		var currentCity = $("#search_city option:selected").val();
+	searchForm.on('submit', function(event){
+    	event.preventDefault();
+    	var currentCity = $("#search_city option:selected").val();
 		var requestData = new WDP.init.CraigslistRequestData(currentCity, 
 															$("#search_category option:selected").val(), 
 															$("#search_subcategory option:selected").val(), 
@@ -26,6 +22,8 @@ WDP.init.searchForm = function(){
 		WDP.models.currentCity = currentCity;
 		WDP.getCLPage(requestData, function(searchResults){WDP.detailViz.init(searchResults)});
 	});
+
+	WDP.init.populateSearchFields();
 
 	searchForm.find('#search_subcategory').on('change', function(event){
 		WDP.init.subCategoryTypeName();
