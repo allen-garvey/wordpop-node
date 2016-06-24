@@ -46,9 +46,10 @@ app.post('/data.json', function (req, res) {
             var title = resultsLink.text();
             var link = resultsLink.attr('href');
             //don't add links to nearby cities
-            var postLink = link.match(/^http:/) ? null : link;
+            var postLink = link;
+            var isLocal = !link.match(/^http:/);
 
-            posts.push({title : title, url: postLink});
+            posts.push({title : title, url: postLink, isLocal: isLocal});
         });
         res.json({posts: posts});
     });

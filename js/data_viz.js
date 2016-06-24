@@ -60,7 +60,7 @@ WDP.detailViz.init = function(searchResults){
 		var title = post.title;
 		var url = post.url;
 		//don't add links to nearby cities
-		if(url){
+		if(post.isLocal){
 			postLinks.push(url);
 		}
 		title.split().map(function(word) {
