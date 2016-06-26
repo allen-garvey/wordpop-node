@@ -80,7 +80,6 @@ WDP.getCLPage = function(requestData, successFunc){
 	$.ajax({
 		url: WDP.baseUrl + 'data.json',
 		type: 'POST',
-		// dataType: 'html',
 		data: requestData
 	})
 	.done(function(searchResults){
@@ -103,11 +102,10 @@ WDP.displayPostBodies = function(postLinks, countedSet, categorySet){
 		$.ajax({
 			url: WDP.baseUrl + 'data/cl-postbody',
 			type: 'GET',
-			dataType: 'html',
 			data: {link : postLink, city : WDP.models.currentCity}
 		})
 		.done(function(post) {
-			var postBody = $(post).find('#postingbody').text();
+			var postBody = post.body;
 			postBody.split(" ").map(function(word) {
 				countedSet.add(word);
 				categorySet.add(word);

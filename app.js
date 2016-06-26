@@ -26,6 +26,10 @@ app.get('/cities-comparison', function (req, res) {
     res.sendFile('views/cities_comparison.html', responseOptions);
 });
 
+app.get('/data/cl.json', function (req, res) {
+    res.send(CLModel.model);
+});
+
 app.post('/data.json', function (req, res) {
     var reqUrl = CLModel.urlFromRequest(req.body);
     
@@ -38,6 +42,7 @@ app.post('/data.json', function (req, res) {
         if (error){
             console.error(err);
             res.status(500).send('Could not connect to ' + reqUrl);
+            return;
         }
         var parsedHTML = $.load(html);
         var posts = [];
@@ -55,43 +60,24 @@ app.post('/data.json', function (req, res) {
     });
 });
 
-function gotHTML(err, resp, html) {
-    if (err){
-        return console.error(err);
-    }
-    var parsedHTML = $.load(html);
-    var posts = [];
-    parsedHTML('a.hdrlnk').map(function(i, element) {
-        var resultsLink = $(element);
-        var title = resultsLink.text();
-        var link = resultsLink.attr('href');
-        //don't add links to nearby cities
-        var postLink = null;
-        if(!link.match(/^http:/)){
-            postLink = link
-        }
-        posts.push({title : title, url: postLink});
-    });
-    return {posts: posts};
-}
-
-app.get('/data/cl.json', function (req, res) {
-    res.send(CLModel.model);
-});
-
 app.get('/data/cl-postbody', function(req, res){
-    // console.log("City requested: " + req.query.city);
     var reqUrlBase = CLModel.cityUrlFromCity(req.query.city);
     if(!reqUrlBase){
         res.status(400).send('400 Bad request');
+        return;
     }
     //test required because if few results craigslist will give links to nearby cities
     var reqUrl = req.query.link.match(/^http:/) ? req.query.link : reqUrlBase + req.query.link;
-    // console.log("Url requested: " + reqUrl);
-    http.get(reqUrl, function(searchResponse) {
-        searchResponse.pipe(res);
-    }); 
-
+    request(reqUrl, function(error, response, html){
+        if (error){
+            console.error(err);
+            res.status(500).send('Could not connect to ' + reqUrl);
+            return;
+        }
+        var parsedHTML = $.load(html);
+        var postBody = parsedHTML('#postingbody').text()
+        res.json({body: postBody});
+    });
 });
 
 //The 404 Route (ALWAYS Keep this as the last route)
