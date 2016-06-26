@@ -126,10 +126,15 @@ WDP.displayPostBodies = function(postLinks, countedSet, categorySet){
 }
 
 WDP.displayWordList = function(sortedCollection){
-	var main_list = $('#main_list');
+	var newListContent = document.createDocumentFragment();
 	sortedCollection.map(function(elem) {
-		main_list.append("<li>" + elem.name + ' ('+ elem.amount + ")</li>");
+		var li = document.createElement('li');
+		li.textContent = elem.name + ' ('+ elem.amount + ')';
+		newListContent.appendChild(li);
 	});
+	var mainList = document.getElementById('main_list');
+	mainList.innerHTML = '';
+	mainList.appendChild(newListContent);
 }
 
 
