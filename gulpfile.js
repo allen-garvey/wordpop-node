@@ -30,7 +30,7 @@ gulp.task('minifyScripts', ['concatScripts'], function(){
 		.pipe(rename('app.min.js'))
 		.pipe(gulp.dest(scriptsOutputDir));
 });
-gulp.task('watchScripts', function(){
+gulp.task('watchScripts', ['minifyScripts'], function(){
 	gulp.watch('js/**/*.js', ['minifyScripts']);
 });
 
