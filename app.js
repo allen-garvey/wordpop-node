@@ -45,6 +45,9 @@ app.post('/data.json', function (req, res) {
             return;
         }
         var parsedHTML = $.load(html);
+        
+        var searchResultsCount = parseInt(parsedHTML('.totalcount').first().text());
+        searchResultsCount = isNaN(searchResultsCount) ? 0 : searchResultsCount;
         var posts = [];
         parsedHTML('a.hdrlnk').map(function(i, element) {
             var resultsLink = $(element);
@@ -56,7 +59,7 @@ app.post('/data.json', function (req, res) {
 
             posts.push({title : title, url: postLink, isLocal: isLocal});
         });
-        res.json({posts: posts});
+        res.json({searchResultsCount: searchResultsCount, posts: posts});
     });
 });
 
