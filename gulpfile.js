@@ -43,9 +43,10 @@ gulp.task('sass', function() {
         .pipe(gulp.dest(sassOutputDir));
 });
 
-gulp.task('watchSass',function() {
+gulp.task('watchSass', ['sass'], function() {
     gulp.watch(config.styles.SOURCE_DIR + '**/*.scss', ['sass']);
 });
 
+gulp.task('watch', ['watchSass', 'watchScripts']);
 gulp.task('build', ['minifyScripts', 'sass']);
 gulp.task('default', ['build']);
