@@ -38,6 +38,8 @@ app.post('/data.json', function (req, res) {
         return;
     }
 
+    var reqUrlBase = CLModel.cityUrlFromCity(req.body.city);
+
     request(reqUrl, function(error, response, html){
         if (error){
             console.error(err);
@@ -49,40 +51,44 @@ app.post('/data.json', function (req, res) {
         var searchResultsCount = parseInt(parsedHTML('.totalcount').first().text());
         searchResultsCount = isNaN(searchResultsCount) ? 0 : searchResultsCount;
         var posts = [];
-        parsedHTML('a.hdrlnk').map(function(i, element) {
+        var postLinks = parsedHTML('a.hdrlnk');
+        var linksToParse = postLinks.length;
+        postLinks.map(function(i, element) {
             var resultsLink = $(element);
             var title = resultsLink.text();
-            var link = resultsLink.attr('href');
-            //don't add links to nearby cities
-            var postLink = link;
-            var isLocal = !link.match(/^http:/);
+            var postLink = resultsLink.attr('href');
+            //test required because if few results craigslist will give links to nearby cities
+            var isLocal = !postLink.match(/^http:/);
+            var postLink = !isLocal ? postLink : reqUrlBase + postLink;
 
-            posts.push({title : title, url: postLink, isLocal: isLocal});
+            request(postLink, function(error, response, html){
+                var postBody = parsePostBody(error, response, html);
+                if(!postBody.error){
+                    posts.push({title : title, url: postLink, isLocal: isLocal, body: postBody.body, time: postBody.time});
+                }
+                else{
+                    posts.push({title : title, url: postLink, isLocal: isLocal});
+                }
+                linksToParse--;
+                if(linksToParse <= 0){
+                    res.json({searchResultsCount: searchResultsCount, posts: posts});
+                } 
+            });
         });
-        res.json({searchResultsCount: searchResultsCount, posts: posts});
+        
     });
 });
 
-app.get('/data/cl-postbody', function(req, res){
-    var reqUrlBase = CLModel.cityUrlFromCity(req.query.city);
-    if(!reqUrlBase){
-        res.status(400).send('400 Bad request');
-        return;
+function parsePostBody(error, response, html){
+    if (error){
+        return {error: error};
     }
-    //test required because if few results craigslist will give links to nearby cities
-    var reqUrl = req.query.link.match(/^http:/) ? req.query.link : reqUrlBase + req.query.link;
-    request(reqUrl, function(error, response, html){
-        if (error){
-            console.error(err);
-            res.status(500).send('Could not connect to ' + reqUrl);
-            return;
-        }
-        var parsedHTML = $.load(html);
-        var postBody = parsedHTML('#postingbody').text();
-        var postTime = parsedHTML('.postinginfo time').attr('datetime');
-        res.json({body: postBody, time: postTime});
-    });
-});
+    var parsedHTML = $.load(html);
+    var postBody = parsedHTML('#postingbody').text();
+    var postTime = parsedHTML('.postinginfo time').attr('datetime');
+    return {body: postBody, time: postTime};
+}
+
 
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res){

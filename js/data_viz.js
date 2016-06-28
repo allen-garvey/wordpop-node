@@ -67,9 +67,16 @@ WDP.detailViz.init = function(searchResults){
 			set.add(word);
 			categorySet.add(word);
 		});
+		var postBody = post.body;
+		if(postBody){
+			postBody.split(" ").map(function(word) {
+				set.add(word);
+				categorySet.add(word);
+			});
+		}
+		
 	});
 	WDP.displayDataForSet(set, categorySet);
-	WDP.displayPostBodies(postLinks, set, categorySet);
 }
 
 /*
@@ -92,37 +99,6 @@ WDP.getCLPage = function(requestData, successFunc){
 	.fail(function(jqXHR, textStatus, error) {
 		WDP.error.display("Sorry, could not connect to Craigslist.");
 	});
-}
-
-WDP.displayPostBodies = function(postLinks, countedSet, categorySet){
-	WDP.posts.total = postLinks.length;
-	WDP.posts.done = 0;
-
-	postLinks.map(function(postLink) {
-		$.ajax({
-			url: WDP.baseUrl + 'data/cl-postbody',
-			type: 'GET',
-			data: {link : postLink, city : WDP.models.currentCity}
-		})
-		.done(function(post) {
-			var postBody = post.body;
-			postBody.split(" ").map(function(word) {
-				countedSet.add(word);
-				categorySet.add(word);
-			});
-		})
-		.fail(function() {
-			console.log("Could not retrieve post body");
-		}).always(function() {
-			WDP.posts.done++;
-			WDP.display.counter(WDP.posts.done, WDP.posts.total);
-			if(WDP.posts.done >= WDP.posts.total){
-				WDP.displayDataForSet(countedSet, categorySet);
-			}
-		});
-	});
-	
-	
 }
 
 WDP.displayWordList = function(sortedCollection){
