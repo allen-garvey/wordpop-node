@@ -55,29 +55,23 @@ WDP.detailViz.init = function(searchResults){
 	var categorySetFactory = new WDP.set.countedCategorySetFactory();
 	var categorySet = categorySetFactory.makeCountedCategorySet(WDP.models.subCategoryTypeName);
 	var set = new WDP.set.countedSet();
-	var postLinks = [];
 	searchResults.posts.forEach(function(post){
-		var title = post.title;
-		var url = post.url;
-		//don't add links to nearby cities
-		if(post.isLocal){
-			postLinks.push(url);
-		}
-		title.split().map(function(word) {
-			set.add(word);
-			categorySet.add(word);
-		});
-		var postBody = post.body;
-		if(postBody){
-			postBody.split(" ").map(function(word) {
-				set.add(word);
-				categorySet.add(word);
-			});
-		}
+		WDP.detailViz.addWords(post.title, set, categorySet);
+		WDP.detailViz.addWords(post.body, set, categorySet);
 		
 	});
 	WDP.displayDataForSet(set, categorySet);
 }
+
+WDP.detailViz.addWords = function(string, set, categorySet){
+	if(!string || typeof string != 'string'){
+		return;
+	}
+	string.split(" ").map(function(word) {
+		set.add(word);
+		categorySet.add(word);
+	});
+};
 
 /*
 * Request data is WDP.init.CraigslistRequestData object
