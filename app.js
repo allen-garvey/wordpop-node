@@ -75,8 +75,9 @@ app.get('/data/cl-postbody', function(req, res){
             return;
         }
         var parsedHTML = $.load(html);
-        var postBody = parsedHTML('#postingbody').text()
-        res.json({body: postBody});
+        var postBody = parsedHTML('#postingbody').text();
+        var postTime = parsedHTML('.postinginfo time').attr('datetime');
+        res.json({body: postBody, time: postTime});
     });
 });
 
