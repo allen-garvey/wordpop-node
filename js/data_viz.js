@@ -154,16 +154,3 @@ WDP.display.categoryBarChart = function(categorySet){
     	.style("width", function(d) { return xScale(d.amount) * 100 + "%"; })
     	.text(function(d) { return d.name + ' (' + WDP.util.formatNumber(d.amount) + ')'; });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
