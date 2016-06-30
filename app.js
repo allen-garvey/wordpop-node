@@ -4,7 +4,7 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var $ = require('cheerio');
 var request = require('request');
-var CLModel = require('./models/cl_model');
+var CLModel = require(__dirname + '/models/cl_model');
 
 //set handlebars file extension to .hbs and set default layout to main
 var handlebars = require('express-handlebars').create({defaultLayout:'main', extname: '.hbs'});
@@ -12,25 +12,15 @@ var handlebars = require('express-handlebars').create({defaultLayout:'main', ext
 app.engine('hbs', handlebars.engine);
 app.set('view engine', 'hbs');
 
-app.use(express.static('public_html'));
+app.use(express.static(__dirname + '/public_html'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-var responseOptions = {
-    root: __dirname,
-    dotfiles: 'deny',
-    headers: {
-        'x-timestamp': Date.now(),
-        'x-sent': true
-    }
-};
 
 app.get('/', function (req, res) {
-    // res.sendFile('views/homepage.html', responseOptions);
     res.render('homepage', {pageName:'home'});
 });
 app.get('/cities-comparison', function (req, res) {
-    // res.sendFile('views/cities_comparison.html', responseOptions);
     res.render('cities_comparison', {pageName:'cities_comparison'});
 });
 
