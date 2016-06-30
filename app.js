@@ -6,6 +6,12 @@ var $ = require('cheerio');
 var request = require('request');
 var CLModel = require('./models/cl_model');
 
+//set handlebars file extension to .hbs and set default layout to main
+var handlebars = require('express-handlebars').create({defaultLayout:'main', extname: '.hbs'});
+//setup app views
+app.engine('hbs', handlebars.engine);
+app.set('view engine', 'hbs');
+
 app.use(express.static('public_html'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -20,10 +26,12 @@ var responseOptions = {
 };
 
 app.get('/', function (req, res) {
-    res.sendFile('views/homepage.html', responseOptions);
+    // res.sendFile('views/homepage.html', responseOptions);
+    res.render('homepage', {});
 });
 app.get('/cities-comparison', function (req, res) {
-    res.sendFile('views/cities_comparison.html', responseOptions);
+    // res.sendFile('views/cities_comparison.html', responseOptions);
+    res.render('cities_comparison', {});
 });
 
 app.get('/data/cl.json', function (req, res) {
