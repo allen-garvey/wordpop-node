@@ -27,11 +27,11 @@ var responseOptions = {
 
 app.get('/', function (req, res) {
     // res.sendFile('views/homepage.html', responseOptions);
-    res.render('homepage', {});
+    res.render('homepage', {pageName:'home'});
 });
 app.get('/cities-comparison', function (req, res) {
     // res.sendFile('views/cities_comparison.html', responseOptions);
-    res.render('cities_comparison', {});
+    res.render('cities_comparison', {pageName:'cities_comparison'});
 });
 
 app.get('/data/cl.json', function (req, res) {
