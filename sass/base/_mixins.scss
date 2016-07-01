@@ -3,16 +3,16 @@
 }
 
 @mixin font_brand{
-	font-family: 'Aladin','Aachen', Times, serif;
-	font-weight: bold;
+	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: 600;
 	@content;
 }
 @mixin font_heading{
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	@content;
 }
 @mixin font_body{
-	font-family: Georgia, 'Times', serif;
+	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	@content;
 }
 @mixin font_code{
