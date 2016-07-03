@@ -96,16 +96,8 @@ var urlFromRequest = function(requestData){
 		return 'not valid subcategory';
 		return false;
 	}
-	var queryString = '';
-	if(requestData.query){
-		if(requestData.subcategory.match(/^missed_connections_/)){
-			queryString = '+' + encodeURIComponent(requestData.query);
-		}
-		else{
-			queryString = '?query=' + encodeURIComponent(requestData.query);
-		}
-	}
-	return cityUrl + '/search/' + subcategory.url + queryString;
+
+	return cityUrl + '/search/' + subcategory.url;
 }
 
 var cityUrlFromCity = function(city, sModel){
