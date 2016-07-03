@@ -36,15 +36,14 @@ var searchModel = {
 									web : {display : 'Web', url : 'web', categoryType: 'programming languages'},
 									software : {display: 'Software', url : 'sof', categoryType: 'programming languages'},
 									internet_engineering : {display : 'Internet Engineering', url : 'eng', categoryType: 'programming languages'},
-									systems_networking : {display : 'Systems/Networking', url : 'sad', categoryType: 'programming languages'},
-									art_media_design : {display : 'Art/Media/Design', url : 'med', categoryType: 'graphic design'}
+									systems_networking : {display : 'Systems/Networking', url : 'sad', categoryType: 'programming languages'}
 					}
 			},
 			gigs : {
 					display : 'Gigs',
 					subcategories: {
-									computer : {display : 'Computer', url : 'cpg', categoryType: 'programming languages'},
-									creative : {display : 'Creative', url : 'crg', categoryType: 'programming languages'}
+									computer : {display : 'Computer', url : 'cpg', categoryType: 'programming languages'}
+									
 					}
 			},
 			community : { 
